@@ -1,0 +1,51 @@
+/* @font-face {
+    font-family: 'ROGFonts';
+    src: url("../font/ROGFonts-Regular.otf") format("embedded-opentype"), url("../font/ROGFonts-Regular.ttf") format("opentype"), url("../font/ROGFonts-Regular.woff"), url("../font/ROGFonts-Regular.woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap
+} */
+
+@font-face {
+    font-family: 'TradeGothicLTPro';
+    src: url("../font/TradeGothicLTPro-Bold.ttf") format("opentype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: 'TTNormsPro';
+    src: url('../font/TTNormsPro-Regular.eot');
+    src: local('TTNormsPro-Regular'),
+    url('../font/TTNormsPro-Regular.woff') format('woff'),
+    url('../font/TTNormsPro-Regular.ttf') format('truetype'),
+    url('../font/TTNormsPro-Regular.svg#htc-icon') format('svg');
+}
+
+@font-face {
+    font-family: 'TTNormsProMedium';
+    src: url('../font/TTNormsPro-Medium.eot');
+    src: local('TTNormsPro-Medium'),
+    url('../font/TTNormsPro-Medium.woff') format('woff'),
+    url('../font/TTNormsPro-Medium.ttf') format('truetype'),
+    url('../font/TTNormsPro-Medium.svg#htc-icon') format('svg');
+}
+
+@font-face {
+    font-family: 'TTNormsProLight';
+    src: url('../font/TTNormsPro-Light.eot');
+    src: local('TTNormsPro-Light'),
+    url('../font/TTNormsPro-Light.woff') format('woff'),
+    url('../font/TTNormsPro-Light.ttf') format('truetype'),
+    url('../font/TTNormsPro-Light.svg#htc-icon') format('svg');
+}
+
+@font-face {
+    font-family: 'TTNormsProBold';
+    src: url('../font/TTNormsPro-Bold.eot');
+    src: local('TTNormsPro-Bold'),
+    url('../font/TTNormsPro-Bold.woff') format('woff'),
+    url('../font/TTNormsPro-Bold.ttf') format('truetype'),
+    url('../font/TTNormsPro-Bold.svg#htc-icon') format('svg');
+}
