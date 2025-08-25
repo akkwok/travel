@@ -10898,7 +10898,9 @@ h3.cor_friend{
         right: 20px;
         bottom: 20px;
     }
+
 }
+
 /* ========= 節點（stop） ========= */
 .stop{
       display: flex;
@@ -11103,8 +11105,8 @@ li.tl-hover .card .meta li{
 /* 讓每顆徽章右邊的導引線夠長就好（橫向內容很寬） */
 /* .timeline.mode-a .badge::before{ width:2000px; } */
 /* .timeline.mode-a .badge::after { width:0; } */ /* 想保留第二條線就刪掉這行 */
-.timeline.  .car-wrap{
-top: -5%;
+.timeline .car-wrap{
+/* top: -5%; */
 }
 /* 可選：卷軸樣式（若想完全隱藏卷軸，改為 display:none; 並加 scrollbar-width:none;） */
 .timeline.mode-a::-webkit-scrollbar{ height:8px; }
@@ -11217,3 +11219,559 @@ top: -5%;
 
 /* 開窗時鎖背景卷軸 */
 html.lb-open, body.lb-open{ overflow: hidden !important; }
+
+
+
+/**/
+@media screen and (max-width: 560px) {
+    #hd .copyright{
+       font-size: 12px; 
+    }
+
+    #hd .family_ak{
+        right: 10px;
+        bottom: 10px;
+    }
+    #hd .copyright{
+        left: 48%;
+    }
+    #hd .sec-map-info .type_list {
+        margin-top: -5.5em;
+        width: 88%;
+    }
+    .tl-style-switch {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+}
+
+/* 基本星點樣式 */
+.star_area{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+.star_area i{
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+}
+.star_area .star_01{
+        top: 40.65%;
+    left: 60.35%;
+}
+.star_area .star_02{
+        top: 40.25%;
+    left: 60.05%;
+}
+.star_area .star_03{
+    top: 28.45%;
+    left: 65.8%;
+}
+.star_area .star_04{
+        top: 29.25%;
+    left: 65.7%;
+}
+.star_area .star_05{
+        top: 33.0%;
+    left: 40.65%;
+}
+.star_area .star_06{
+        top: 32%;
+    left: 41.25%;
+}
+.star_area .star_07{
+        top: 31.5%;
+    left: 41.25%;
+}
+.star_area .star_08{
+        top: 25.8%;
+    left: 41.15%;
+}
+.star_area .star_09{
+        top: 23.4%;
+    left: 40.9%;
+}
+.star_area .star_10{
+    top: 23.25%;
+    left: 41.55%;
+}
+.star_area .star_11{
+        top: 21.05%;
+    left: 36.75%;
+}
+.star_area .star_12{
+        top: 19.15%;
+    left: 38.5%;
+}
+.star_area .star_13{
+    top: 19.55%;
+    left: 37.85%;
+}
+.star_area .star_14{
+        top: 17.85%;
+    left: 36.33%;
+}
+.star_area .star_15{
+    top: 18.55%;
+    left: 36.65%;
+}
+.star_area .star_16{
+    top: 19.15%;
+    left: 36.85%;
+}
+.star_area .star_17{
+        top: 19.7%;
+    left: 36.6%;
+}
+.star_area .star_18{
+        top: 19.4%;
+    left: 36.25%;
+}
+.star_area .star_19{
+        top: 21.0%;
+    left: 35.40%;
+}
+.star_area .star_20{
+        top: 22.0%;
+    left: 35.55%;
+}
+.star_area .star_21{
+        top: 22.0%;
+    left: 35.9%;
+}
+.star_area .star_22{
+        top: 23.0%;
+    left: 36.20%;
+}
+.star_area .star_23{
+    top: 16%;
+    left: 34.15%;
+}
+.star_area .star_24{
+        top: 16.65%;
+    left: 34.05%;
+}
+.star_area .star_25{
+        top: 18.8%;
+    left: 33.55%;
+}
+.star_area .star_26{
+        top: 37.25%;
+    left: 60.75%;
+}
+.star_area .star_27{
+        top: 33.65%;
+    left: 61.75%;
+}
+.star_area .star_28{
+    top: 20.05%;
+    left: 37.1%;
+}
+.star_area .star_29{
+        top: 30.80%;
+    left: 42.0%
+}
+@media screen and (max-width: 1680px) {
+    .star_area .star_01{
+        top: 40.8%;
+        left: 58.5%;
+    }
+    .star_area .star_02{
+        top: 40.25%;
+        left: 58.2%;
+    }
+    .star_area .star_03{
+            top: 28.5%;
+        left: 65.5%;
+    }
+    .star_area .star_04{
+        top: 29.2%;
+        left: 65.4%;
+    }
+    .star_area .star_05{
+        top: 32.8%;
+        left: 33.4%;
+    }
+    .star_area .star_06{
+            top: 31.5%;
+        left: 33.8%;
+    }
+    .star_area .star_07{
+            top: 30.8%;
+        left: 34.5%;
+    }
+    .star_area .star_08{
+        top: 25.7%;
+        left: 33.5%;
+    }
+    .star_area .star_09{
+            top: 23.5%;
+        left: 33.25%;
+    }
+    .star_area .star_10{
+        top: 23.3%;
+        left: 34.0%;
+    }
+    .star_area .star_11{
+        top: 19.3%;
+        left: 30%;
+    }
+    .star_area .star_12{
+            top: 19.5%;
+        left: 29.3%;
+    }
+    .star_area .star_13{
+        top: 19.2%;
+        left: 27.9%;
+    }
+    .star_area .star_14{
+        top: 19.9%;
+        left: 28.1%;
+    }
+    .star_area .star_15{
+            top: 19.7%;
+        left: 27.6%;
+    }
+    .star_area .star_16{
+            top: 18.6%;
+        left: 27.7%;
+    }
+    .star_area .star_17{
+            top: 17.9%;
+        left: 27.25%;
+    }
+    .star_area .star_18{
+        top: 19.35%;
+        left: 27.20%;
+    }
+    .star_area .star_19{
+            top: 20.95%;
+        left: 26%;
+    }
+    .star_area .star_20{
+            top: 21.95%;
+        left: 26.3%;
+    }
+    .star_area .star_21{
+            top: 21.95%;
+        left: 26.7%;
+    }
+    .star_area .star_22{
+        top: 22.95%;
+        left: 27.1%;
+    }
+    .star_area .star_23{
+        top: 16.65%;
+        left: 24.2%;
+    }
+    .star_area .star_24{
+        top: 16.30%;
+        left: 24.3%;
+    }
+    .star_area .star_25{
+            top: 18.75%;
+        left: 23.6%;
+    }
+    .star_area .star_26{
+        top: 36.9%;
+        left: 58.8%;
+    }
+    .star_area .star_27{
+        top: 33.6%;
+        left: 60.3%;
+    }
+    .star_area .star_28{
+        top: 20.7%;
+        left: 27.15%;
+    }
+    .star_area .star_29{
+            top: 31.9%;
+        left: 33.8%;
+    }
+}
+@media screen and (max-width: 1380px) {
+    .star_area .star_01{
+        top: 40.8%;
+        left: 58.5%;
+    }
+    .star_area .star_02{
+        top: 40.25%;
+        left: 58.2%;
+    }
+    .star_area .star_03{
+            top: 28.5%;
+        left: 65.5%;
+    }
+    .star_area .star_04{
+        top: 29.2%;
+        left: 65.4%;
+    }
+    .star_area .star_05{
+        top: 32.8%;
+        left: 33.4%;
+    }
+    .star_area .star_06{
+            top: 31.5%;
+        left: 33.8%;
+    }
+    .star_area .star_07{
+            top: 30.8%;
+        left: 34.5%;
+    }
+    .star_area .star_08{
+        top: 25.7%;
+        left: 33.5%;
+    }
+    .star_area .star_09{
+            top: 23.5%;
+        left: 33.25%;
+    }
+    .star_area .star_10{
+        top: 23.3%;
+        left: 34.0%;
+    }
+    .star_area .star_11{
+        top: 19.3%;
+        left: 30%;
+    }
+    .star_area .star_12{
+            top: 19.5%;
+        left: 29.3%;
+    }
+    .star_area .star_13{
+        top: 19.2%;
+        left: 27.9%;
+    }
+    .star_area .star_14{
+        top: 19.9%;
+        left: 28.1%;
+    }
+    .star_area .star_15{
+            top: 19.7%;
+        left: 27.6%;
+    }
+    .star_area .star_16{
+            top: 18.6%;
+        left: 27.7%;
+    }
+    .star_area .star_17{
+            top: 17.9%;
+        left: 27.25%;
+    }
+    .star_area .star_18{
+        top: 19.35%;
+        left: 27.20%;
+    }
+    .star_area .star_19{
+            top: 20.95%;
+        left: 26%;
+    }
+    .star_area .star_20{
+            top: 21.95%;
+        left: 26.3%;
+    }
+    .star_area .star_21{
+            top: 21.95%;
+        left: 26.7%;
+    }
+    .star_area .star_22{
+        top: 22.95%;
+        left: 27.1%;
+    }
+    .star_area .star_23{
+        top: 16.65%;
+        left: 24.2%;
+    }
+    .star_area .star_24{
+        top: 16.30%;
+        left: 24.3%;
+    }
+    .star_area .star_25{
+            top: 18.75%;
+        left: 23.6%;
+    }
+    .star_area .star_26{
+        top: 36.9%;
+        left: 58.8%;
+    }
+    .star_area .star_27{
+        top: 33.6%;
+        left: 60.3%;
+    }
+    .star_area .star_28{
+        top: 20.7%;
+        left: 27.15%;
+    }
+    .star_area .star_29{
+            top: 31.9%;
+        left: 33.8%;
+    }
+}
+@media screen and (max-width: 1080px) {
+    .star_area .star_01{
+        top: 40.8%;
+        left: 58.5%;
+    }
+    .star_area .star_02{
+        top: 40.25%;
+        left: 58.2%;
+    }
+    .star_area .star_03{
+            top: 28.5%;
+        left: 65.5%;
+    }
+    .star_area .star_04{
+        top: 29.2%;
+        left: 65.4%;
+    }
+    .star_area .star_05{
+        top: 32.8%;
+        left: 33.4%;
+    }
+    .star_area .star_06{
+            top: 31.5%;
+        left: 33.8%;
+    }
+    .star_area .star_07{
+            top: 30.8%;
+        left: 34.5%;
+    }
+    .star_area .star_08{
+        top: 25.7%;
+        left: 33.5%;
+    }
+    .star_area .star_09{
+            top: 23.5%;
+        left: 33.25%;
+    }
+    .star_area .star_10{
+        top: 23.3%;
+        left: 34.0%;
+    }
+    .star_area .star_11{
+        top: 19.3%;
+        left: 30%;
+    }
+    .star_area .star_12{
+            top: 19.5%;
+        left: 29.3%;
+    }
+    .star_area .star_13{
+        top: 19.2%;
+        left: 27.9%;
+    }
+    .star_area .star_14{
+        top: 19.9%;
+        left: 28.1%;
+    }
+    .star_area .star_15{
+            top: 19.7%;
+        left: 27.6%;
+    }
+    .star_area .star_16{
+            top: 18.6%;
+        left: 27.7%;
+    }
+    .star_area .star_17{
+            top: 17.9%;
+        left: 27.25%;
+    }
+    .star_area .star_18{
+        top: 19.35%;
+        left: 27.20%;
+    }
+    .star_area .star_19{
+            top: 20.95%;
+        left: 26%;
+    }
+    .star_area .star_20{
+            top: 21.95%;
+        left: 26.3%;
+    }
+    .star_area .star_21{
+            top: 21.95%;
+        left: 26.7%;
+    }
+    .star_area .star_22{
+        top: 22.95%;
+        left: 27.1%;
+    }
+    .star_area .star_23{
+        top: 16.65%;
+        left: 24.2%;
+    }
+    .star_area .star_24{
+        top: 16.30%;
+        left: 24.3%;
+    }
+    .star_area .star_25{
+            top: 18.75%;
+        left: 23.6%;
+    }
+    .star_area .star_26{
+        top: 36.9%;
+        left: 58.8%;
+    }
+    .star_area .star_27{
+        top: 33.6%;
+        left: 60.3%;
+    }
+    .star_area .star_28{
+        top: 20.7%;
+        left: 27.15%;
+    }
+    .star_area .star_29{
+            top: 31.9%;
+        left: 33.8%;
+    }
+}
+.star_area .star_m1,
+.star_area .star_m2,
+.star_area .star_m3{
+  width: 2px;
+  height: 2px;
+  border-radius: 5px;
+  display: inline-block;
+  background: #ffd84d;                 /* 星星黃色 */
+  opacity: 1;
+  /* will-change: opacity, transform;
+  animation: starTwinkle 5s linear infinite; */
+}
+
+/* 彼此時間錯開（約 1 秒） */
+.star_area .star_m1{ animation-delay: 0s; }
+.star_area .star_m2{ animation-delay: 1s; }
+.star_area .star_m3{ animation-delay: 2s; }
+
+/* 閃爍關鍵影格：由暗→亮→淡出（總長 5s） */
+@keyframes starTwinkle{
+  0%   { opacity: 0;   transform: scale(0.7);  }
+  20%  { opacity: .35; transform: scale(0.9);  }
+  35%  { opacity: 1;   transform: scale(1.6); } /* 高亮 */
+  50%  { opacity: .7;  transform: scale(1.1);  }
+  75%  { opacity: 0;   transform: scale(0.6);  }   /* 淡出完成 */
+  100% { opacity: 0;   transform: scale(0.6);  }
+}
+
+/* 手機寬度：啟用行動鎖定模式 */
+@media (max-width:1080px){
+  /* 停掉上方所有 CSS 動畫/轉場，避免它自己跑 */
+  #hd.is-mobile-lock .mark_area *,
+  #hd.is-mobile-lock .num_area *{
+    animation: none !important;
+    transition: none !important;
+    animation-play-state: paused !important;
+  }
+  /* 先把全部數字說明藏起來，只讓目前的顯示 */
+  #hd.is-mobile-lock .scalable_info_area .num_area p{ opacity: 0 !important; }
+  #hd.is-mobile-lock .scalable_info_area .num_area p[data-stick]{ opacity: 1 !important; }
+  /* 有些設計是靠 .on 變亮；這裡再保險一次給 data-stick 的優先權 */
+  #hd.is-mobile-lock .mark_area .location:not([data-stick]){ opacity: .25 !important; }
+  #hd.is-mobile-lock .mark_area .location[data-stick]{ opacity: 1 !important; }
+  
+}
