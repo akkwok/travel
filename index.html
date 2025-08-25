@@ -16,6 +16,7 @@
   <!-- For PDC content -->
   <link rel="stylesheet" href="v1/css/hd-style_pdc.css">
   <script src="v1/lib/jquery-3.7.0.min.js"></script>
+<!--   <div class="web_box"> -->
   <div id="hd" class="clear-style">
     <div class="line_t"></div>
     <div class="line_l"></div>
@@ -309,7 +310,37 @@
         
     </section>
     <section id="pageContent-sec-info" class="sec-map-info">
+      
       <div class="map_info">
+        <div class="tl-style-switch" role="toolbar" aria-label="時間軸顯示方式">
+          <button type="button" class="btn-tl btn-style-a" aria-pressed="false">
+            <svg viewBox="0 0 24 24" role="img" aria-label="Mode A：單列橫向"
+                 fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <g fill="currentColor" stroke="none">
+                <circle cx="6"  cy="12" r="1.6"/>
+                <circle cx="10" cy="12" r="1.6"/>
+                <circle cx="14" cy="12" r="1.6"/>
+                <circle cx="18" cy="12" r="1.6"/>
+              </g>
+            </svg>
+          </button>
+          <button type="button" class="btn-tl btn-style-b" aria-pressed="true">
+            <svg viewBox="0 0 24 24" role="img" aria-label="Mode B：多列換行"
+                 fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="2" y1="8"  x2="22" y2="8"/>
+              <line x1="2" y1="16" x2="22" y2="16"/>
+              <g fill="currentColor" stroke="none">
+                <circle cx="6"  cy="8"  r="1.6"/>
+                <circle cx="12" cy="8"  r="1.6"/>
+                <circle cx="18" cy="8"  r="1.6"/>
+                <circle cx="6"  cy="16" r="1.6"/>
+                <circle cx="12" cy="16" r="1.6"/>
+                <circle cx="18" cy="16" r="1.6"/>
+              </g>
+            </svg>
+          </button>
+        </div>
         <ul class="type_list">
           <li>
             <span class="cor_fm number"></span><b>家族<sup>7</sup></b>
@@ -336,6 +367,7 @@
             <span class="car_line"></span><b>自助<sup>17</sup></b>
           </li>
         </ul>
+        
         <div class="tl-wrap" aria-labelledby="tl-title">
           <h2 id="tl-title" class="sr-only">AK 家族旅遊時間軸</h2>
 
@@ -486,7 +518,7 @@
             </li>
 
             <!-- 第 10 站 -->
-            <li class="stop">
+            <li class="stop self_line">
               <span class="badge car_line number cor_child" aria-label="第 10 站">10</span>
               <article class="card">
                 <h3 class="card-title">
@@ -504,7 +536,7 @@
             </li>
 
             <!-- 第 11 站 -->
-            <li class="stop">
+            <li class="stop self_line">
               <span class="badge car_line number cor_fm" aria-label="第 11 站">11<i class="kid"></i></span>
               <article class="card">
                 <h3 class="card-title">
@@ -519,7 +551,7 @@
             </li>
 
             <!-- 第 12 站 -->
-            <li class="stop">
+            <li class="stop self_line">
               <span class="car-wrap">
                 <img src="v1/img/ico_car.png" alt="" class="ico_car">
               </span>
@@ -539,7 +571,7 @@
             </li>
 
             <!-- 第 13 站 -->
-            <li class="stop">
+            <li class="stop self_line">
               <span class="badge car_line number cor_child" aria-label="第 13 站">13</span>
               <article class="card">
                 <h3 class="card-title">
@@ -557,7 +589,7 @@
             </li>
 
             <!-- 第 14 站 -->
-            <li class="stop">
+            <li class="stop self_line">
               <span class="badge car_line number cor_love" aria-label="第 14 站">14</span>
               <article class="card">
                 <h3 class="card-title">
@@ -570,7 +602,7 @@
             </li>
 
             <!-- 第 15 站 -->
-            <li class="stop">
+            <li class="stop self_line">
               <span class="car-wrap">
                 <img src="v1/img/ico_car.png" alt="" class="ico_car">
               </span>
@@ -590,7 +622,7 @@
             </li>
 
             <!-- 第 16 站 -->
-            <li class="stop">
+            <li class="stop self_line">
               <span class="car-wrap">
                 <img src="v1/img/ico_car.png" alt="" class="ico_car">
               </span>
@@ -610,7 +642,7 @@
             </li>
 
             <!-- 第 17 站 -->
-            <li class="stop">
+            <li class="stop self_line">
               <span class="car-wrap">
                 <img src="v1/img/ico_car.png" alt="" class="ico_car">
               </span>
@@ -647,7 +679,7 @@
             </li>
 
             <!-- 第 19 站 -->
-            <li class="stop">
+            <li class="stop self_line">
               <span class="badge car_line number cor_friend" aria-label="第 19 站">19<i class="kid"></i></span>
               <article class="card">
                 <h3 class="card-title">
@@ -662,7 +694,7 @@
             </li>
 
             <!-- 第 20 站 -->
-            <li class="stop">
+            <li class="stop self_line">
               <span class="badge car_line number cor_love" aria-label="第 20 站">20</span>
               <article class="card">
                 <h3 class="card-title">
@@ -675,7 +707,7 @@
             </li>
 
             <!-- 第 21 站 -->
-            <li class="stop">
+            <li class="stop self_line">
               <span class="badge car_line number cor_child" aria-label="第 21 站">21</span>
               <article class="card">
                 <h3 class="card-title">
@@ -692,7 +724,7 @@
             </li>
 
             <!-- 第 22 站 -->
-            <li class="stop">
+            <li class="stop self_line">
               <span class="badge car_line number cor_bro" aria-label="第 22 站">22</span>
               <article class="card">
                 <h3 class="card-title">
@@ -708,7 +740,7 @@
             </li>
 
             <!-- 第 23 站 -->
-            <li class="stop">
+            <li class="stop self_line">
               <span class="badge car_line number cor_love" aria-label="第 23 站">23</span>
               <article class="card">
                 <h3 class="card-title">
@@ -725,7 +757,7 @@
             </li>
 
             <!-- 第 24 站 -->
-            <li class="stop">
+            <li class="stop self_line">
               <span class="badge car_line number cor_fm" aria-label="第 24 站">24<i class="kid"></i></span>
               <article class="card">
                 <h3 class="card-title">
@@ -741,7 +773,7 @@
             </li>
 
             <!-- 第 25 站 -->
-            <li class="stop">
+            <li class="stop self_line">
               <span class="badge car_line number cor_child" aria-label="第 25 站">25</span>
               <article class="card">
                 <h3 class="card-title">
@@ -761,7 +793,7 @@
             </li>
 
             <!-- 第 26 站 -->
-            <li class="stop">
+            <li class="stop self_line">
               <span class="badge car_line number cor_friend" aria-label="第 26 站">26<i class="kid"></i></span>
               <article class="card">
                 <h3 class="card-title">
@@ -776,7 +808,7 @@
             </li>
 
             <!-- 第 27 站 -->
-            <li class="stop">
+            <li class="stop self_line">
               <span class="badge car_line number cor_child" aria-label="第 27 站">27</span>
               <article class="card">
                 <h3 class="card-title">
@@ -793,7 +825,7 @@
             </li>
 
             <!-- 第 28 站 -->
-            <li class="stop">
+            <li class="stop self_line">
               <span class="badge car_line number cor_child" aria-label="第 28 站">28</span>
               <article class="card">
                 <h3 class="card-title">
@@ -825,7 +857,7 @@
             </li>
 
             <!-- 第 30 站 -->
-            <li class="stop">
+            <li class="stop self_line">
               <span class="badge car_line number cor_friend" aria-label="第 30 站">30<i class="kid"></i></span>
               <article class="card">
                 <h3 class="card-title">
@@ -926,13 +958,34 @@
     </section>
 
   </div>
+  <!-- Lightbox 根節點 -->
+<div id="lb-root" aria-hidden="true">
+  <div class="lb-mask" aria-hidden="true"></div>
+  <div class="lb-stage" role="dialog" aria-modal="true" aria-label="旅遊紀錄">
+    <button type="button" class="lb-close" aria-label="關閉">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+        <path d="M6 6L18 18M18 6L6 18" stroke="#111" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div class="lb-content"></div>
+    <div class="lb-loading" aria-hidden="true">
+      <span class="lb-spinner"></span>
+    </div>
+  </div>
+</div>
+
+<!-- （可選）本地內容池：有放就優先用、沒有就走遠端抓取 -->
+<div id="lb-pool" hidden>
+  <!-- <div class="lightbox_01">…</div> -->
+</div>
+<!--   </div> -->
   
-  <script src="v1/banner/js/bundle.min.js"></script>
-  <script src="v1/js/bundle.js"></script>
-  <script src="v1/js/main.js"></script>
-  <script src="v1/js/add.js"></script>
+  <!-- <script src="v1/banner/js/bundle.min.js"></script>
+  <script src="v1/js/bundle.js"></script> -->
+  <!-- <script src="v1/js/main.js"></script>
+  <script src="v1/js/add.js"></script> -->
   <!-- <script src="v1/lib/jquery.navScroll.js"></script> -->
-  <!-- <script src="v1/lib/jquery.colorbox.js"></script> -->
+  <script src="v1/lib/jquery.colorbox.js"></script>
   <script>
 
       $(function () {
@@ -1022,7 +1075,7 @@
     '29': '04'
   };
 
-  // 反向映射（pin → timeline）
+  // 反向映射（pin/num → timeline，支援一對多）
   const PIN_TO_TL = {
     '10': ['10','33'],
     '12': ['12','15'],
@@ -1075,6 +1128,10 @@
     // 反向：同步高亮對應的 timeline li.stop（支援一對多）
     const tlTargets = PIN_TO_TL[id] || [id];
     setTimelineHoverByIds(tlTargets, true);
+
+    // 🔸在 mode-a 自動捲到對應 stop
+    const targetId = pickFirstExistingId(tlTargets);
+    if (targetId) scrollToStopId(targetId, 'center');
   });
 
   $('.mark_area').on('mouseleave', 'a', function () {
@@ -1146,6 +1203,10 @@
     // 同步高亮對應的 timeline（若該點有重複站號，一次高亮所有）
     const tlTargets = pToTimelineIds(id);
     setTimelineHoverByIds(tlTargets, true);
+
+    // 🔸在 mode-a 自動捲到對應 stop
+    const targetId = pickFirstExistingId(tlTargets);
+    if (targetId) scrollToStopId(targetId, 'center');
   });
 
   $('.num_area').on('mouseleave', 'p', function () {
@@ -1258,7 +1319,263 @@
       scrollSpy: true
     });
   }
+
+  /* ========= 時間軸樣式切換（Style A/B）+ 滑鼠滾輪橫向捲（加速版） ========= */
+  const $timeline = $('.timeline').first();
+
+  /* === 可調參數 === */
+  const SCROLL_BOOST = 3.0;   // 滾輪倍速：1 = 原速，建議 2~4
+  const MIN_STEP_PX  = 60;    // 每次滾輪的最小位移（像素）
+
+  /* 垂直滾輪 -> 水平捲（只在 A 模式） */
+  const WHEEL_KEY = '__tlWheelHandler';
+  function bindWheelAsHorizontal($el){
+    const el = $el.get(0);
+    if (!el || el[WHEEL_KEY]) return;
+
+    const handler = (evRaw) => {
+      if (!$timeline.hasClass('mode-a')) return;
+
+      // 避免干擾瀏覽器縮放（Ctrl/⌘ + 滾輪）
+      if (evRaw.ctrlKey || evRaw.metaKey) return;
+
+      const absX = Math.abs(evRaw.deltaX);
+      const absY = Math.abs(evRaw.deltaY);
+      const forceH = evRaw.shiftKey; // Shift+滾輪：強制水平
+
+      // 主要是垂直滾動或 Shift 強制，才把捲動轉給水平
+      if (forceH || absY > absX) {
+        evRaw.preventDefault();
+
+        // 將不同 deltaMode 正規化為像素
+        let dy = evRaw.deltaY;
+        let dx = evRaw.deltaX;
+        if (evRaw.deltaMode === 1) { dy *= 16; dx *= 16; }                      // line -> px（近似）
+        else if (evRaw.deltaMode === 2) { dy *= el.clientHeight; dx *= el.clientWidth; } // page -> px
+
+        const primary = forceH ? (dy || dx) : dy;
+        const step = Math.sign(primary) * Math.max(Math.abs(primary) * SCROLL_BOOST, MIN_STEP_PX);
+
+        el.scrollLeft += step;
+      }
+    };
+
+    el.addEventListener('wheel', handler, { passive:false });
+    const p = el.parentElement;
+    if (p) p.addEventListener('wheel', handler, { passive:false });
+    el[WHEEL_KEY] = handler;
+  }
+  function unbindWheelAsHorizontal($el){
+    const el = $el.get(0);
+    if (!el || !el[WHEEL_KEY]) return;
+    const handler = el[WHEEL_KEY];
+    el.removeEventListener('wheel', handler, { passive:false });
+    const p = el.parentElement;
+    if (p) p.removeEventListener('wheel', handler, { passive:false });
+    el[WHEEL_KEY] = null;
+  }
+
+  /* 兩種顯示模式切換 */
+  function setTimelineMode(mode){ // 'a' or 'b'
+    if (mode === 'a'){
+      $timeline.addClass('mode-a').removeClass('mode-b')
+               .attr('aria-label','時間軸（橫向單列可捲）');
+      $('.btn-style-a').attr('aria-pressed','true');
+      $('.btn-style-b').attr('aria-pressed','false');
+      bindWheelAsHorizontal($timeline);
+    }else{
+      $timeline.removeClass('mode-a').addClass('mode-b')
+               .attr('aria-label','時間軸（多列）');
+      $('.btn-style-a').attr('aria-pressed','false');
+      $('.btn-style-b').attr('aria-pressed','true');
+      unbindWheelAsHorizontal($timeline);
+    }
+  }
+
+  /* 初始：A 模式 */
+  setTimelineMode('a');
+  $timeline.scrollLeft(0);
+
+  /* A/B 按鈕 */
+  $('.btn-style-a').on('click', () => setTimelineMode('a'));
+  $('.btn-style-b').on('click', () => setTimelineMode('b'));
+
+  /* 鍵盤左右鍵輔助（只在 A 模式） */
+  $timeline.attr('tabindex','0').on('keydown', function(e){
+    if (!$timeline.hasClass('mode-a')) return;
+    const step = $(this).find('.stop').first().outerWidth(true) || 320;
+    if (e.key === 'ArrowRight'){ this.scrollLeft += step; e.preventDefault(); }
+    if (e.key === 'ArrowLeft'){  this.scrollLeft -= step; e.preventDefault(); }
+  });
+
+  /* === 滑到 pin / num → 自動捲到對應 stop（只在 A 模式） === */
+  function pickFirstExistingId(ids){
+    const arr = Array.isArray(ids) ? ids : [ids];
+    for (const id of arr) if (stopIndex[id] && stopIndex[id].length) return id;
+    return null;
+  }
+  function scrollToStopId(id, align = 'center'){
+    if (!$timeline.hasClass('mode-a')) return;     // 只在 A 模式動作
+    const $stop = stopIndex[id];
+    if (!$stop || !$stop.length) return;
+
+    const container = $timeline.get(0);
+    const el        = $stop.get(0);
+
+    const cardW = el.offsetWidth;
+    const viewW = container.clientWidth;
+
+    let targetLeft;
+    if (align === 'start'){
+      targetLeft = el.offsetLeft - 12;             // 讓卡片靠左一點點（扣掉 gap）
+    }else if (align === 'end'){
+      targetLeft = el.offsetLeft - (viewW - cardW) + 12;
+    }else{ // center
+      targetLeft = el.offsetLeft - (viewW - cardW) / 2;
+    }
+
+    // 邊界防呆
+    const maxLeft = container.scrollWidth - viewW;
+    targetLeft = Math.max(0, Math.min(targetLeft, maxLeft));
+
+    // 平滑捲動（原生優先，退回 jQuery 動畫）
+    try{
+      container.scrollTo({ left: targetLeft, behavior: 'smooth' });
+    }catch(_){
+      $timeline.stop(true).animate({ scrollLeft: targetLeft }, 400);
+    }
+  }
 });
 
   </script>
   
+<script>
+            $(function() {
+                $(".pic_open").colorbox({
+                    maxWidth: '96%',
+                    maxHeight: '700px',
+                    rel: 'group1'
+                });
+            })
+
+
+</script>
+
+<script>
+/* =========================
+   Lightbox（使用你現有的 #lb-root DOM，不再動態建）
+   - 點 .mark_area a / .num_area p / .timeline li.stop 會開啟
+   - 檔名規則：lightbox_XX.html
+   - file:// 走 iframe；http(s) 先 fetch，失敗再 iframe
+   - 若 #lb-pool 內有 .lightbox_XX 片段，優先用 pool
+   - 別名對應：20→02、33→10、30→18、24→14、29→04、15→12
+   ========================= */
+(function($){
+  const $root    = $('#lb-root');
+  const $mask    = $root.find('.lb-mask');
+  const $stage   = $root.find('.lb-stage');
+  const $close   = $root.find('.lb-close');
+  const $content = $root.find('.lb-content');
+
+  // 若頁面忘了放結構，可作安全補建（可留可刪）
+  if ($root.length === 0){
+    console.warn('[Lightbox] 找不到 #lb-root，請把提供的 HTML 結構貼進 body 內。');
+    return;
+  }
+
+  // ===== 工具
+  const TL_ALIAS = { '33':'10','15':'12','20':'02','30':'18','24':'14','29':'04' };
+  const pad2 = n => String(n).padStart(2,'0');
+  const canonicalId = id => TL_ALIAS[id] || id;
+  const urlFor = id => `lightbox_${id}.html`;
+
+  function idFromMark(el){ const m = el.className.match(/\bt_(\d+)\b/); return m ? pad2(m[1]) : null; }
+  function idFromNum(el){  const m = el.className.match(/\bp_(\d+)\b/); return m ? pad2(m[1]) : null; }
+  function idFromStop($li){
+    const $badge = $li.find('.badge').first();
+    if (!$badge.length) return null;
+    const txt = $badge.clone().children().remove().end().text().trim();
+    const n = parseInt(txt,10);
+    return Number.isNaN(n) ? null : pad2(n);
+  }
+
+  function setLoading(on){
+    $root.toggleClass('is-loading', !!on);
+  }
+  function showRoot(){
+    $('html,body').addClass('lb-open');
+    $root.addClass('is-open').attr('aria-hidden','false');
+  }
+  function hideRoot(){
+    $root.removeClass('is-open is-loading').attr('aria-hidden','true');
+    $('html,body').removeClass('lb-open');
+    $content.empty();
+  }
+
+  // 優先使用 #lb-pool 內的片段
+  function tryLoadFromPool(id){
+    const $pool = $('#lb-pool');
+    if (!$pool.length) return false;
+    const $frag = $pool.children(`.lightbox_${id}`).first();
+    if (!$frag.length) return false;
+    $content.html($frag.clone().prop('hidden', false));
+    return true;
+  }
+
+  // http(s)：fetch → 成功就塞字串，失敗 fallback iframe
+  async function loadRemote(id){
+    const url = urlFor(id);
+    if (location.protocol === 'file:'){
+      // 本機：避免 CORS，直接 iframe
+      $content.html(`<iframe class="lb-iframe" src="${url}" title="Lightbox ${id}" loading="lazy"></iframe>`);
+      return;
+    }
+    try{
+      const res = await fetch(url, { cache: 'no-store' });
+      if (!res.ok) throw new Error(res.statusText);
+      const html = await res.text();
+      $content.html(html);
+    }catch(err){
+      // 失敗就改用 iframe
+      $content.html(`<iframe class="lb-iframe" src="${url}" title="Lightbox ${id}" loading="lazy"></iframe>`);
+    }
+  }
+
+  function openLightboxById(rawId){
+    if (!rawId) return;
+    const id = canonicalId(rawId);
+    showRoot();
+    setLoading(true);
+
+    // 先試 pool，再遠端
+    if (tryLoadFromPool(id)){
+      setLoading(false);
+    }else{
+      loadRemote(id).finally(() => setLoading(false));
+    }
+  }
+  window.openLightboxById = openLightboxById; // 若你想從別處手動呼叫
+
+  // ===== 關閉行為
+  $mask.on('click', hideRoot);
+  $close.on('click', hideRoot);
+  $(document).on('keydown', function(e){
+    if (e.key === 'Escape' && $root.hasClass('is-open')) hideRoot();
+  });
+
+  // ===== 三種觸發點
+  $('.mark_area').on('click', 'a', function(e){
+    e.preventDefault();
+    const id = idFromMark(this);
+    if (id) openLightboxById(id);
+  });
+  $('.num_area').on('click', 'p', function(){
+    const id = idFromNum(this);
+    if (id) openLightboxById(id);
+  });
+  $('.timeline').on('click', 'li.stop', function(){
+    const id = idFromStop($(this));
+    if (id) openLightboxById(id);
+  });
+})(jQuery);
+</script>

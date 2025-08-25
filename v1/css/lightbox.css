@@ -1,0 +1,18 @@
+.lightbox_bg{
+    background:rgba(255,255,255,0.9);
+    background: url(../img/map.jpg) repeat left top;
+    height: 100%;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 100px #45a4ff;
+}
+
+.lightbox_bg h2{
+	font-size: 3em;
+	color: #fff;
+	font-family: "Roboto";
+	margin: 0;
+	text-align: center;
+}
