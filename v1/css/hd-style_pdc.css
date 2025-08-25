@@ -11236,12 +11236,14 @@ html.lb-open, body.lb-open{ overflow: hidden !important; }
         left: 48%;
     }
     #hd .sec-map-info .type_list {
-        margin-top: -5.5em;
-        width: 88%;
+        margin-top: 0em;
+        width: 100%;
+        padding: 0;
     }
     .tl-style-switch {
         flex-direction: column;
         align-items: flex-end;
+        display: none;
     }
 }
 
@@ -11758,20 +11760,3 @@ html.lb-open, body.lb-open{ overflow: hidden !important; }
   100% { opacity: 0;   transform: scale(0.6);  }
 }
 
-/* 手機寬度：啟用行動鎖定模式 */
-@media (max-width:1080px){
-  /* 停掉上方所有 CSS 動畫/轉場，避免它自己跑 */
-  #hd.is-mobile-lock .mark_area *,
-  #hd.is-mobile-lock .num_area *{
-    animation: none !important;
-    transition: none !important;
-    animation-play-state: paused !important;
-  }
-  /* 先把全部數字說明藏起來，只讓目前的顯示 */
-  #hd.is-mobile-lock .scalable_info_area .num_area p{ opacity: 0 !important; }
-  #hd.is-mobile-lock .scalable_info_area .num_area p[data-stick]{ opacity: 1 !important; }
-  /* 有些設計是靠 .on 變亮；這裡再保險一次給 data-stick 的優先權 */
-  #hd.is-mobile-lock .mark_area .location:not([data-stick]){ opacity: .25 !important; }
-  #hd.is-mobile-lock .mark_area .location[data-stick]{ opacity: 1 !important; }
-  
-}
