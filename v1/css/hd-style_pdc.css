@@ -4070,6 +4070,9 @@ li.tl-hover .card .meta li{
     .timeline.mode-a .stop{
       min-width:220px; /* 每張卡片的最小寬度，自行調整 */
     }
+    .timeline.mode-a .stop[data-code="1"]{
+        min-width:150px;
+    }
     .timeline.mode-a{
         padding-top: 0.5em;
     }
@@ -4201,7 +4204,7 @@ html.lb-open, body.lb-open{ overflow: hidden !important; }
 /**/
 @media screen and (max-width: 1080px) {
     #AK .copyright{
-       font-size: 12px; 
+       font-size: 0.65em; 
     }
 
     #AK .family_ak{

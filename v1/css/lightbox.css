@@ -48,6 +48,12 @@ h4, .h4 {
     width: 100%;
     border-radius: 6px 6px 0 0;
 }
+.lightbox_bg img.logo{
+    border: none;
+    width: calc(100% + 36px);
+    border-radius: 6px 6px 0 0;
+    margin: 0 -18px 0;
+}
 .lightbox_bg h2{
 	font-size: 3em;
 	color: #fff;
@@ -57,7 +63,7 @@ h4, .h4 {
 }
 .lightbox_bg .info{
 	background: rgb(0 11 20 / 50%);
-    border-radius: 0 0 6px 6px;
+    border-radius: 6px 6px;
     padding: 18px;
     margin-top: -5px;
     margin-bottom: 1em;
@@ -97,7 +103,11 @@ color: #fff;
 .lightbox_bg .info p.date{
 	width: 100%;
 	text-align: right;
-	margin: 0;
+	margin: -10px 0 0;
+}
+.lightbox_bg .info p.tag{
+    color: #71ffbf;
+    margin: 0;
 }
 .lightbox_bg .info p.think{
 	font-weight: 600;
