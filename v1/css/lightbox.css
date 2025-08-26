@@ -24,14 +24,18 @@ h4, .h4 {
     background: url(../img/map.jpg) repeat left top;
     /* height: 100%; */
     border-radius: 5px;
-    display: flex;
-    align-items: center;
     box-shadow: inset 0 0 100px #45a4ff;
     font-family: "TTNormsProMedium", "Roboto", "Segoe UI", "Arial", "PingFang TC", "Microsoft JhengHei", "Microsoft YaHei", sans-serif;
     flex-direction: column;
     padding: 18px;
     display: inline-block;
     width: calc(100% - 36px);
+}
+.lightbox_bg.none_info{
+ 	height: 100%;
+ 	display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .lightbox_bg img{
 	    width: calc(100% - 6px);
