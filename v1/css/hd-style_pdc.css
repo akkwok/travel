@@ -4131,8 +4131,8 @@ li.tl-hover .card .meta li{
 /* 關閉按鈕（修正看不見的問題：層級、底色、icon 顏色） */
 #lb-root .lb-close{
   position: absolute;
-      top: 12px;
-    right: 23px;
+      top: 2px;
+    right: 2px;
   appearance: none;
   border: 0;
   width: 36px;

@@ -36,5 +36,5 @@
 
   /* 小螢幕微調 */
   @media (max-width: 480px){
-    .lb-pager a{ width: 42px; height: 42px; font-size: 24px; }
+    .lb-pager a{ width: 42px; height: 80px; font-size: 24px; }
   }
