@@ -1460,7 +1460,8 @@
 <script>
 /* =========================
    Lightbox（使用現有 #lb-root；支援 fetch 後執行內嵌 <script>）
-   ＋ 內建上一頁/下一頁 pager（由父頁產生，100% 可用）
+   ＋ 內建上一頁/下一頁 pager（由父頁產生）
+   版本：不做任何別名正規化，全部用真實頁碼 01~34
    ========================= */
 (function($){
   'use strict';
@@ -1476,11 +1477,8 @@
     return;
   }
 
-  /* ========= 基本工具 ========= */
-  const TL_ALIAS = { '33':'10','15':'12','20':'02','30':'18','24':'14','29':'04' };
+  /* ========= 工具 ========= */
   const pad2 = n => String(n).padStart(2,'0');
-  const canonicalId = id => TL_ALIAS[id] || id;
-
   const urlFor = id => `lightbox_${id}.html`;
 
   function idFromMark(el){ const m = el.className.match(/\bt_(\d+)\b/); return m ? pad2(m[1]) : null; }
@@ -1540,7 +1538,7 @@
       <path d="M8 8 Q 8 6 9.6 7.2 L 14.4 10.8 Q 16 12 14.4 13.2 L 9.6 16.8 Q 8 18 8 16 L 8 8 Z"/>
     </svg>`;
 
-  let currentId = null; // '01'..'34'
+  let currentId = null; // '01'..'34'（始終用真實頁碼）
 
   function ensurePager(){
     let nav = $stage.children('.lb-pager').get(0);
@@ -1610,7 +1608,7 @@
   async function loadRemote(id){
     const url = urlFor(id);
     if (location.protocol === 'file:'){
-      // 本機：避免 CORS，直接 iframe（pager 覆蓋在父頁，OK）
+      // 本機：避免 CORS，用 iframe（pager 在父頁）
       $content.html(`<iframe class="lb-iframe" src="${url}" title="Lightbox ${id}" loading="lazy"></iframe>`);
       return;
     }
@@ -1626,20 +1624,17 @@
     }
   }
 
-  /* ========= 對外：打開指定編號 ========= */
+  /* ========= 對外 API：精準開啟（不做別名） ========= */
   function openLightboxById(rawId){
     if (!rawId) return;
-    const id = canonicalId(pad2(rawId));
+    const idExact = pad2(rawId);      // 01..34
     showRoot();
     setLoading(true);
-
-    // 先畫 pager（避免閃爍），再載內容
-    updatePager(id);
-
-    if (tryLoadFromPool(id)){
+    updatePager(idExact);              // 先更新 pager
+    if (tryLoadFromPool(idExact)){
       setLoading(false);
     }else{
-      loadRemote(id).finally(() => setLoading(false));
+      loadRemote(idExact).finally(() => setLoading(false));
     }
   }
   window.openLightboxById = openLightboxById;
@@ -1651,7 +1646,7 @@
     if (e.key === 'Escape' && $root.hasClass('is-open')) hideRoot();
   });
 
-  /* ========= 三種觸發 ========= */
+  /* ========= 三種觸發（全部直接用實際頁碼） ========= */
   $('.mark_area').on('click', 'a', function(e){
     e.preventDefault();
     const id = idFromMark(this);
