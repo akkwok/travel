@@ -115,7 +115,7 @@ color: #fff;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    /* max-width: 200px; */
+    max-width: inherit;
 }
 .lightbox_bg .card .meta li{
   display: flex;
