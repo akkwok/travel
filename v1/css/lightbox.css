@@ -103,11 +103,11 @@ color: #fff;
 	font-weight: 600;
     color: #ffad55;
 }
-.card{
+.lightbox_bg .card{
     border-radius: 0px;
     padding: 0px 1.4em 12px 0;
 }
-.card .meta{
+.lightbox_bg .card .meta{
   color: #72b2e8;
     list-style: none;
     margin: 1em 0 0 0.5em;
@@ -117,7 +117,7 @@ color: #fff;
     flex-direction: row;
     /* max-width: 200px; */
 }
-.card .meta li{
+.lightbox_bg .card .meta li{
   display: flex;
     width: auto;
     margin: 0 7px 2px -6px;
@@ -132,9 +132,9 @@ li.tl-hover .card .meta li{
     border-radius: 6px;
     
 }
-.meta li::before {
+.lightbox_bg .meta li::before {
     content: "•";
-    color: var(--ink-sub);
+    color: #000;
     line-height: 1;
     transform: translateY(0.15em) translateX(-0.15em);
 }
