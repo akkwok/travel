@@ -10555,12 +10555,12 @@ h3.cor_friend{
         --ax: 2.4cqw;
     }
     #hd .scalable_info_area .num_area p.p_04 {
-                top: 42%;
+                top: 41%;
         right: inherit;
-        left: 67%;
-        --hx: 24px;
-        --ax: 0cqw;
-        --a: -65deg;
+        left: 63%;
+        --hx: 46px;
+        --ax: 1cqw;
+        --a: 65deg;
         transform: translate(-100%, -100%);
     }
         #hd .scalable_info_area .num_area p.p_28 {
@@ -10570,10 +10570,10 @@ h3.cor_friend{
         --ax: 0cqw;
     }
         #hd .scalable_info_area .num_area p.p_27 {
-                top: 37%;
-        left: 72.2%;
-        --hx: -1cqw;
-        --ax: 4.4cqw;
+                top: 35%;
+        left: 69.8%;
+        --hx: -2cqw;
+        --ax: 7.4cqw;
         --a: -115deg;
     }
         #hd .scalable_info_area .num_area p.p_12 {
@@ -10603,7 +10603,7 @@ h3.cor_friend{
     }
         #hd .scalable_info_area .num_area p.p_14 {
         top: 25%;
-        right: 35.6%;
+        right: 34.6%;
                 --hx: 6.8cqw;
         --ax: 17cqw;
     }
@@ -10614,10 +10614,10 @@ h3.cor_friend{
         --ax: 3.4cqw;
     }
         #hd .scalable_info_area .num_area p.p_18 {
-        top: 29.9%;
-        right: 23.2%;
-        --hx: 1cqw;
-        --ax: 5cqw;
+        top: 28.9%;
+        right: 28.2%;
+        --hx: 6cqw;
+        --ax: 4cqw;
         transform: translate(50%, -50%);
     }
         #hd .scalable_info_area .num_area p.p_10 {
@@ -11153,6 +11153,7 @@ li.tl-hover .card .meta li{
   display: block;
   z-index: 1; /* 蓋過遮罩 */
       border: 1px solid #1d7bcb;
+          max-width: 600px !important;
 }
 
 /* 關閉按鈕（修正看不見的問題：層級、底色、icon 顏色） */
@@ -11187,6 +11188,7 @@ li.tl-hover .card .meta li{
   /* background: #fff; */
 }
 
+
 /* 載入中的遮蓋層 */
 #lb-root .lb-loading{
   position: absolute;
@@ -11216,14 +11218,16 @@ li.tl-hover .card .meta li{
   display: block;
   /* background:#fff; */
 }
-
+#lb-root .lb-content .lb-iframe body{
+    margin: 8px 0 8px 8px;
+}
 /* 開窗時鎖背景卷軸 */
 html.lb-open, body.lb-open{ overflow: hidden !important; }
 
 
 
 /**/
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 1080px) {
     #hd .copyright{
        font-size: 12px; 
     }
@@ -11499,237 +11503,237 @@ html.lb-open, body.lb-open{ overflow: hidden !important; }
 @media screen and (max-width: 1380px) {
     .star_area .star_01{
         top: 40.8%;
-        left: 58.5%;
+        left: 58.2%;
     }
     .star_area .star_02{
         top: 40.25%;
-        left: 58.2%;
+                left: 57.8%;
     }
     .star_area .star_03{
             top: 28.5%;
-        left: 65.5%;
+        left: 67%;
     }
     .star_area .star_04{
         top: 29.2%;
-        left: 65.4%;
+                left: 66.8%;
     }
     .star_area .star_05{
-        top: 32.8%;
-        left: 33.4%;
+                top: 32.9%;
+        left: 26.9%;
     }
     .star_area .star_06{
-            top: 31.5%;
-        left: 33.8%;
+        top: 31.7%;
+        left: 27.8%;
     }
     .star_area .star_07{
-            top: 30.8%;
-        left: 34.5%;
+                top: 30.8%;
+        left: 28.8%;
     }
     .star_area .star_08{
         top: 25.7%;
-        left: 33.5%;
+        left: 27.5%;
     }
     .star_area .star_09{
             top: 23.5%;
-        left: 33.25%;
+                left: 27.1%;
     }
     .star_area .star_10{
         top: 23.3%;
-        left: 34.0%;
+                left: 28.2%;
     }
     .star_area .star_11{
         top: 19.3%;
-        left: 30%;
+                left: 23.2%;
     }
     .star_area .star_12{
             top: 19.5%;
-        left: 29.3%;
+                left: 22.3%;
     }
     .star_area .star_13{
         top: 19.2%;
-        left: 27.9%;
+                left: 20.7%;
     }
     .star_area .star_14{
         top: 19.9%;
-        left: 28.1%;
+        left: 20.8%;
     }
     .star_area .star_15{
             top: 19.7%;
-        left: 27.6%;
+                left: 20%;
     }
     .star_area .star_16{
             top: 18.6%;
-        left: 27.7%;
+                left: 20.3%;
     }
     .star_area .star_17{
             top: 17.9%;
-        left: 27.25%;
+        left: 19.7%;
     }
     .star_area .star_18{
         top: 19.35%;
-        left: 27.20%;
+                left: 19.7%;
     }
     .star_area .star_19{
             top: 20.95%;
-        left: 26%;
+                left: 18.3%;
     }
     .star_area .star_20{
             top: 21.95%;
-        left: 26.3%;
+        left: 18.5%;
     }
     .star_area .star_21{
             top: 21.95%;
-        left: 26.7%;
+        left: 19%;
     }
     .star_area .star_22{
         top: 22.95%;
-        left: 27.1%;
+        left: 19.5%;
     }
     .star_area .star_23{
         top: 16.65%;
-        left: 24.2%;
+        left: 16.2%;
     }
     .star_area .star_24{
-        top: 16.30%;
-        left: 24.3%;
+                top: 16.30%;
+        left: 16.3%;
     }
     .star_area .star_25{
-            top: 18.75%;
-        left: 23.6%;
+                top: 18.75%;
+        left: 15.2%;
     }
     .star_area .star_26{
-        top: 36.9%;
-        left: 58.8%;
+                top: 37.1%;
+        left: 58.6%;
     }
     .star_area .star_27{
         top: 33.6%;
-        left: 60.3%;
+                left: 60.5%;
     }
     .star_area .star_28{
         top: 20.7%;
-        left: 27.15%;
+        left: 19.6%;
     }
     .star_area .star_29{
-            top: 31.9%;
-        left: 33.8%;
+                top: 31.2%;
+        left: 27.8%;
     }
 }
 @media screen and (max-width: 1080px) {
     .star_area .star_01{
-        top: 40.8%;
-        left: 58.5%;
+                top: 48.8%;
+        left: 64.5%;
     }
     .star_area .star_02{
-        top: 40.25%;
-        left: 58.2%;
+                top: 48.35%;
+        left: 64.1%;
     }
     .star_area .star_03{
-            top: 28.5%;
-        left: 65.5%;
+                top: 36.5%;
+        left: 75.5%;
     }
     .star_area .star_04{
-        top: 29.2%;
-        left: 65.4%;
+                top: 37.2%;
+        left: 75.4%;
     }
     .star_area .star_05{
-        top: 32.8%;
-        left: 33.4%;
+        top: 41.1%;
+        left: 26.4%;
     }
     .star_area .star_06{
-            top: 31.5%;
-        left: 33.8%;
+                top: 40.1%;
+        left: 26.9%;
     }
     .star_area .star_07{
-            top: 30.8%;
-        left: 34.5%;
+                top: 39.5%;
+        left: 26.9%;
     }
     .star_area .star_08{
-        top: 25.7%;
-        left: 33.5%;
+               top: 33.8%;
+        left: 26.0%;
     }
     .star_area .star_09{
-            top: 23.5%;
-        left: 33.25%;
+                top: 31.5%;
+        left: 25.45%;
     }
     .star_area .star_10{
-        top: 23.3%;
-        left: 34.0%;
+                top: 31.4%;
+        left: 26.8%;
     }
     .star_area .star_11{
-        top: 19.3%;
-        left: 30%;
+        top: 27.3%;
+        left: 20.7%;
     }
     .star_area .star_12{
-            top: 19.5%;
-        left: 29.3%;
+        top: 27.5%;
+        left: 19.3%;
     }
     .star_area .star_13{
-        top: 19.2%;
-        left: 27.9%;
+                top: 27.2%;
+        left: 17.25%;
     }
     .star_area .star_14{
-        top: 19.9%;
-        left: 28.1%;
+                top: 27.9%;
+        left: 17.6%;
     }
     .star_area .star_15{
-            top: 19.7%;
-        left: 27.6%;
+                top: 27.7%;
+        left: 16.8%;
     }
     .star_area .star_16{
-            top: 18.6%;
-        left: 27.7%;
+                top: 26.6%;
+        left: 16.9%;
     }
     .star_area .star_17{
-            top: 17.9%;
-        left: 27.25%;
+                top: 25.9%;
+        left: 16.25%;
     }
     .star_area .star_18{
-        top: 19.35%;
-        left: 27.20%;
+                top: 27.35%;
+        left: 16.2%;
     }
     .star_area .star_19{
-            top: 20.95%;
-        left: 26%;
+        top: 28.90%;
+        left: 14.4%;
     }
     .star_area .star_20{
-            top: 21.95%;
-        left: 26.3%;
+                top: 29.95%;
+        left: 14.7%;
     }
     .star_area .star_21{
-            top: 21.95%;
-        left: 26.7%;
+                top: 29.95%;
+        left: 15.3%;
     }
     .star_area .star_22{
-        top: 22.95%;
-        left: 27.1%;
+                top: 31%;
+        left: 15.8%;
     }
     .star_area .star_23{
-        top: 16.65%;
-        left: 24.2%;
+                top: 24.7%;
+        left: 11.7%;
     }
     .star_area .star_24{
-        top: 16.30%;
-        left: 24.3%;
+        top: 24.3%;
+        left: 11.7%;
     }
     .star_area .star_25{
-            top: 18.75%;
-        left: 23.6%;
+                top: 26.85%;
+        left: 10.6%;
     }
     .star_area .star_26{
-        top: 36.9%;
-        left: 58.8%;
+                top: 38.7%;
+        left: 27.4%;
     }
     .star_area .star_27{
-        top: 33.6%;
-        left: 60.3%;
+                top: 45.4%;
+        left: 65.0%;
     }
     .star_area .star_28{
-        top: 20.7%;
-        left: 27.15%;
+        top: 28.9%;
+        left: 16.15%;
     }
     .star_area .star_29{
-            top: 31.9%;
-        left: 33.8%;
+                top: 41.9%;
+        left: 67.4%;
     }
 }
 .star_area .star_m1,
@@ -11740,11 +11744,18 @@ html.lb-open, body.lb-open{ overflow: hidden !important; }
   border-radius: 5px;
   display: inline-block;
   background: #ffd84d;                 /* 星星黃色 */
-  opacity: 1;
-  /* will-change: opacity, transform;
-  animation: starTwinkle 5s linear infinite; */
+  opacity: 0;
+  will-change: opacity, transform;
+  animation: starTwinkle 5s linear infinite;
 }
-
+@media screen and (max-width: 1080px) {
+    .star_area .star_m1,
+    .star_area .star_m2,
+    .star_area .star_m3{
+      width: 1px;
+      height: 1px;
+    }
+}
 /* 彼此時間錯開（約 1 秒） */
 .star_area .star_m1{ animation-delay: 0s; }
 .star_area .star_m2{ animation-delay: 1s; }

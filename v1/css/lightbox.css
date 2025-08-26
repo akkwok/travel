@@ -1,18 +1,149 @@
+body{
+    margin: 8px 8px 8px 8px;
+}
+h3, .h3 {
+    font-family: "TTNormsProMedium", "Roboto", "Segoe UI", "Arial", "PingFang TC", "Microsoft JhengHei", "Microsoft YaHei", sans-serif;
+    font-size: 1.2em;
+    font-weight: normal;
+    line-height: 1.125;
+    letter-spacing: 0;
+    color: #fff;
+    margin: .25em;
+}
+h4, .h4 {
+    font-family: "TTNormsProMedium", "Roboto", "Segoe UI", "Arial", "PingFang TC", "Microsoft JhengHei", "Microsoft YaHei", sans-serif;
+    font-size: 1em;
+    font-weight: normal;
+    line-height: 1.125;
+    letter-spacing: 0;
+    color: #fff;
+    margin-bottom: .25em;
+}
 .lightbox_bg{
-    background:rgba(255,255,255,0.9);
+        background: rgba(255, 255, 255, 0.9);
     background: url(../img/map.jpg) repeat left top;
-    height: 100%;
+    /* height: 100%; */
     border-radius: 5px;
     display: flex;
     align-items: center;
-    justify-content: center;
     box-shadow: inset 0 0 100px #45a4ff;
+    font-family: "TTNormsProMedium", "Roboto", "Segoe UI", "Arial", "PingFang TC", "Microsoft JhengHei", "Microsoft YaHei", sans-serif;
+    flex-direction: column;
+    padding: 18px;
+    display: inline-block;
+    width: calc(100% - 36px);
 }
-
+.lightbox_bg img{
+	    width: calc(100% - 6px);
+    border-radius: 6px;
+    border: 4px #fff solid;
+}
 .lightbox_bg h2{
 	font-size: 3em;
 	color: #fff;
 	font-family: "Roboto";
 	margin: 0;
-	text-align: center;
+	text-align: left;
 }
+.lightbox_bg .info{
+	background: rgb(0 11 20 / 50%);
+    border-radius: 6px;
+    padding: 18px;
+}
+.lightbox_bg .info h2{
+	font-size: 1.4em;
+	color: #71ffbf;
+}
+.lightbox_bg .info h3{
+	font-size: 1.3em;
+	font-weight: 600;
+}
+.lightbox_bg .info h4{
+	font-size: 1.1em;
+	color: #ffd968;
+}
+.lightbox_bg .info p{
+	color: #ffffff;
+    margin: 0.5em 0;
+    line-height: 1.5em;
+}
+.lightbox_bg .info ol{
+color: #fff;
+}
+.lightbox_bg .info ol li{
+	margin-bottom: 0.5em;
+}
+.lightbox_bg .info span.hr{
+	width: 100%;
+	display: inline-block;
+	height: 1px;
+	background: none;
+	border-top: 1px dashed rgba(255, 255, 255, 0.5);
+	margin: 0.5em 0;
+}
+.lightbox_bg .info p.date{
+	width: 100%;
+	text-align: right;
+	margin: 0;
+}
+.lightbox_bg .info p.think{
+	font-weight: 600;
+    color: #ffad55;
+}
+.card{
+    border-radius: 12px;
+    padding: 8px 1.4em 12px 0;
+}
+.card .meta{
+  color: #72b2e8;
+    list-style: none;
+    margin: 1em 0 0 0.5em;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    /* max-width: 200px; */
+}
+.card .meta li{
+  display: flex;
+    width: auto;
+    margin: 0 7px 2px -6px;
+    padding: 2px 0.5em 2px 0.5em;
+    background: rgb(82 255 176 / 82%);
+    border-radius: 6px;
+    color: #000;
+}
+.stop:hover .card .meta li,
+li.tl-hover .card .meta li{
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    
+}
+.meta li::before {
+    content: "•";
+    color: var(--ink-sub);
+    line-height: 1;
+    transform: translateY(0.15em) translateX(-0.15em);
+}
+
+:root{
+    --sb-size: 10px;
+    --sb-track: rgba(255,255,255,0);
+    --sb-thumb: rgba(38,126,205,.38);
+    --sb-thumb-hover: rgba(255,255,255,.55);
+  }
+  html{
+    scrollbar-width: thin;
+    scrollbar-color: var(--sb-thumb) var(--sb-track);
+  }
+  /* Chrome/Edge/Safari */
+  html::-webkit-scrollbar{ width: var(--sb-size); height: var(--sb-size); }
+  html::-webkit-scrollbar-track{ background: var(--sb-track); border-radius: 999px; }
+  html::-webkit-scrollbar-thumb{
+    background-color: var(--sb-thumb);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  html::-webkit-scrollbar-thumb:hover{ background-color: var(--sb-thumb-hover); }
+  html::-webkit-scrollbar-corner{ background: transparent; }
