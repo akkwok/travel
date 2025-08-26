@@ -1,81 +1,96 @@
 (function () {
-  // 你有幾頁就改這兩個數
-  const MIN = 1;
-  const MAX = 34;
+  'use strict';
 
-  // 是否要循環（第 1 頁的上一頁跳到第 34；第 34 的下一頁跳回第 1）
-  const WRAP = false; // 想循環就改成 true
+  /* 可調參數 */
+  const MIN  = 1;     // 第一頁
+  const MAX  = 34;    // 最後一頁
+  const WRAP = false; // true=循環；false=邊界停住
 
-  // 解析檔名中的數字（支援 lightbox_1.html 或 lightbox_01.html）
-  const m = location.pathname.match(/lightbox_(\d+)\.html$/i);
-  if (!m) return;
+  /* 解析目前頁碼（支援 ?query / #hash） */
+  const m = location.pathname.match(/lightbox_(\d+)\.html$/i)
+        || location.href.match(/lightbox_(\d+)\.html(?:[#?]|$)/i);
+  if (!m) return; // 不在目標頁就不做事
 
-  const raw = m[1];                    // 當前頁碼的原始位數
-  const padLen = raw.length;           // 1 或 2
-  const num = Math.max(MIN, Math.min(MAX, parseInt(raw, 10)));
+  const raw    = m[1];               // 例如 '5' 或 '25' 或 '05'
+  const padLen = raw.length;         // 1 或 2
+  const num    = Math.max(MIN, Math.min(MAX, parseInt(raw, 10)));
 
-  const fmt = n => String(n).padStart(padLen, '0');
-  const fileOf = n => `lightbox_${fmt(n)}.html`;
+  const fmt    = (n) => String(n).padStart(padLen, '0');
+  const fileOf = (n) => `lightbox_${fmt(n)}.html`;
 
   const prevNum = WRAP ? (num === MIN ? MAX : num - 1) : (num > MIN ? num - 1 : null);
   const nextNum = WRAP ? (num === MAX ? MIN : num + 1) : (num < MAX ? num + 1 : null);
 
-  // ===== SVG（圓角三角形）
-  const ICON_PREV = `
-    <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor" aria-hidden="true">
-      <path d="M16 8 Q 16 6 14.4 7.2 L 9.6 10.8 Q 8 12 9.6 13.2 L 14.4 16.8 Q 16 18 16 16 L 16 8 Z"/>
-    </svg>`;
-  const ICON_NEXT = `
-    <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor" aria-hidden="true">
-      <path d="M8 8 Q 8 6 9.6 7.2 L 14.4 10.8 Q 16 12 14.4 13.2 L 9.6 16.8 Q 8 18 8 16 L 8 8 Z"/>
-    </svg>`;
+  /* 找容器與現有 nav；沒有就補一個 */
+  const container = document.querySelector('.lightbox_bg') || document.body;
 
-  // 建按鈕
-  const nav = document.createElement('nav');
-  nav.className = 'lb-pager';
-  nav.setAttribute('aria-label', '上一頁 / 下一頁');
-
-  const aPrev = document.createElement('a');
-  aPrev.className = 'prev';
-  aPrev.setAttribute('aria-label', '上一頁');
-  aPrev.innerHTML = ICON_PREV;
-  aPrev.rel = 'prev';
-  if (prevNum) {
-    aPrev.href = fileOf(prevNum);
-  } else {
-    aPrev.setAttribute('aria-disabled', 'true');
-    aPrev.tabIndex = -1;
-    aPrev.classList.add('is-disabled');
+  let nav = container.querySelector('.lb-pager');
+  if (!nav) {
+    nav = document.createElement('nav');
+    nav.className = 'lb-pager';
+    nav.setAttribute('aria-label', '上一頁 / 下一頁');
+    nav.innerHTML = `
+      <a class="prev" aria-label="上一頁" rel="prev">
+        <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor" aria-hidden="true">
+          <path d="M16 8 Q16 6 14.4 7.2 L9.6 10.8 Q8 12 9.6 13.2 L14.4 16.8 Q16 18 16 16 Z"/>
+        </svg>
+      </a>
+      <a class="next" aria-label="下一頁" rel="next">
+        <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor" aria-hidden="true">
+          <path d="M8 8 Q8 6 9.6 7.2 L14.4 10.8 Q16 12 14.4 13.2 L9.6 16.8 Q8 18 8 16 Z"/>
+        </svg>
+      </a>`;
+    container.appendChild(nav);
   }
 
-  const aNext = document.createElement('a');
-  aNext.className = 'next';
-  aNext.setAttribute('aria-label', '下一頁');
-  aNext.innerHTML = ICON_NEXT;
-  aNext.rel = 'next';
-  if (nextNum) {
-    aNext.href = fileOf(nextNum);
-  } else {
-    aNext.setAttribute('aria-disabled', 'true');
-    aNext.tabIndex = -1;
-    aNext.classList.add('is-disabled');
+  const aPrev = nav.querySelector('a.prev');
+  const aNext = nav.querySelector('a.next');
+
+  function setLink(a, n) {
+    if (!a) return;
+    if (n) {
+      a.href = fileOf(n);
+      a.dataset.num = String(n);
+      a.removeAttribute('aria-disabled');
+      a.classList.remove('is-disabled');
+      a.tabIndex = 0;
+    } else {
+      a.removeAttribute('href');
+      a.setAttribute('aria-disabled', 'true');
+      a.classList.add('is-disabled');
+      a.tabIndex = -1;
+    }
+  }
+  setLink(aPrev, prevNum);
+  setLink(aNext, nextNum);
+
+  /* 若在父頁 lightbox 內，優先用父頁切換（不整頁跳走） */
+  function tryOpenInParent(n) {
+    try {
+      if (window.top && window.top !== window && typeof window.top.openLightboxById === 'function') {
+        window.top.openLightboxById(fmt(n));
+        return true;
+      }
+    } catch (_) { /* 跨網域就算了 */ }
+    return false;
   }
 
-  nav.appendChild(aPrev);
-  nav.appendChild(aNext);
+  // 點擊：攔截 disabled；能用父頁就用父頁
+  nav.addEventListener('click', (e) => {
+    const a = e.target.closest('a');
+    if (!a) return;
+    if (a.getAttribute('aria-disabled') === 'true') { e.preventDefault(); return; }
 
-  // 優先放進 .lightbox_bg（沒有就放 body）
-  (document.querySelector('.lightbox_bg') || document.body).appendChild(nav);
-
-  // 鍵盤左右鍵支援
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft'  && prevNum) location.href = fileOf(prevNum);
-    if (e.key === 'ArrowRight' && nextNum) location.href = fileOf(nextNum);
+    const n = a.dataset.num ? parseInt(a.dataset.num, 10) : NaN;
+    if (!Number.isNaN(n) && tryOpenInParent(n)) e.preventDefault();
   });
 
-  // 停用狀態防誤點
-  nav.addEventListener('click', (e) => {
-    const a = e.target.closest('a[aria-disabled="true"]');
-    if (a) e.preventDefault();
+  // 鍵盤左右鍵
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft' && prevNum) {
+      if (!tryOpenInParent(prevNum)) location.href = fileOf(prevNum);
+    } else if (e.key === 'ArrowRight' && nextNum) {
+      if (!tryOpenInParent(nextNum)) location.href = fileOf(nextNum);
+    }
   });
 })();
