@@ -3664,6 +3664,9 @@ h3.cor_friend{
     margin-right: 1em;
     margin-bottom: 1em;
 }
+#AK .sec-map-info .type_list li sup{
+    margin-left: 0.2em;
+}
 #AK .sec-map-info .type_list li .number {
     width: 18px;
     height: 18px;
@@ -3686,6 +3689,19 @@ h3.cor_friend{
     top: inherit;
     left: inherit;
     transform: translate(0%, 0%);
+}
+@media screen and (max-width: 768px) {
+    #AK .sec-map-info .type_list li{
+        margin-right: 0.5em;
+        margin-bottom: 0.5em;
+    }
+    #AK .sec-map-info .type_list li .number{
+        width: 12px;
+        height: 12px;
+    }
+    #AK .sec-map-info .type_list li b{
+        font-size: 0.9em;
+    }
 }
 .car_line{
     width: 30px;
@@ -3722,7 +3738,7 @@ h3.cor_friend{
 }
 @media screen and (max-width: 768px) {
     .tl-wrap{
-      padding: 5px 0px 30px;
+      padding: 5px 0px 20px;
     }
 }
 /* ========= 條狀時間軸（桌機：橫向；行動：直向） ========= */
@@ -3834,6 +3850,7 @@ h3.cor_friend{
     transform: translate(-50%, 0%);
 }
 @media screen and (max-width: 768px) {
+
     #AK .sec-map-info .type_list{
         margin-top: 1em;
     }
@@ -3867,7 +3884,7 @@ h3.cor_friend{
 /* ===== 外層：左右連續平滑移動 ===== */
 .car-wrap{
       position: absolute;
-    top: -6%;
+    top: -5%;
     left: 16%;
     width: 26px;
     height: 26px;
@@ -4053,6 +4070,9 @@ li.tl-hover .card .meta li{
     .timeline.mode-a .stop{
       min-width:220px; /* 每張卡片的最小寬度，自行調整 */
     }
+    .timeline.mode-a{
+        padding-top: 0.5em;
+    }
 }
 /* 讓每顆徽章右邊的導引線夠長就好（橫向內容很寬） */
 /* .timeline.mode-a .badge::before{ width:2000px; } */
@@ -4111,8 +4131,8 @@ li.tl-hover .card .meta li{
 /* 關閉按鈕（修正看不見的問題：層級、底色、icon 顏色） */
 #lb-root .lb-close{
   position: absolute;
-  top: 10px;
-  right: 10px;
+      top: 12px;
+    right: 23px;
   appearance: none;
   border: 0;
   width: 36px;

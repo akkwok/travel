@@ -1,0 +1,40 @@
+/* 位置與外觀 */
+  .lb-pager{
+    position: fixed;
+    inset: 0;
+    pointer-events: none;     /* 讓容器本身不吃點擊，只讓按鈕吃 */
+    z-index: 999;             /* 蓋在內頁內容上（不影響父頁的關閉鈕） */
+  }
+  .lb-pager a{
+        position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: 700 28px / 1 system-ui, -apple-system, "Segoe UI", Arial;
+    color: #fff;
+    text-decoration: none;
+    background: rgb(255 255 255 / 25%);
+    border-radius: 0;
+    backdrop-filter: blur(3px);
+    pointer-events: auto;
+    user-select: none;
+  }
+  .lb-pager a:hover{ background: rgba(0,0,0,.55); }
+  .lb-pager a.prev{ left: 0px; border-radius: 0 5px 5px 0;}
+  .lb-pager a.next{ right: 0px; border-radius: 5px 0 0 5px;}
+
+  /* 邊界時停用按鈕 */
+  .lb-pager a[aria-disabled="true"]{
+    opacity: .35;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  /* 小螢幕微調 */
+  @media (max-width: 480px){
+    .lb-pager a{ width: 42px; height: 42px; font-size: 24px; }
+  }
