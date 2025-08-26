@@ -1459,34 +1459,31 @@
 
 <script>
 /* =========================
-   Lightbox（#lb-root）
-   - 會 fetch lightbox_XX.html 放進 .lb-content
-   - 會「執行」被 innerHTML 插入的 <script>（如 v1/js/lb-pager.js）
-   - 若內頁沒生出按鈕，主頁自動補一組「上一頁/下一頁」(本機 file:// 也行)
+   Lightbox（使用你現有的 #lb-root DOM，不再動態建）
+   - 點 .mark_area a / .num_area p / .timeline li.stop 會開啟
+   - 檔名規則：lightbox_XX.html
+   - file:// 走 iframe；http(s) 先 fetch，失敗再 iframe
+   - 若 #lb-pool 內有 .lightbox_XX 片段，優先用 pool
+   - 別名對應：20→02、33→10、30→18、24→14、29→04、15→12
    ========================= */
-(function ($) {
-  'use strict';
-
-  /* === 你的頁碼範圍 & 是否循環 === */
-  const PAGER_MIN  = 1;
-  const PAGER_MAX  = 34;
-  const PAGER_WRAP = false; // true=循環, false=不循環
-
+(function($){
   const $root    = $('#lb-root');
   const $mask    = $root.find('.lb-mask');
+  const $stage   = $root.find('.lb-stage');
   const $close   = $root.find('.lb-close');
   const $content = $root.find('.lb-content');
 
-  if ($root.length === 0) {
-    console.warn('[Lightbox] 找不到 #lb-root');
+  // 若頁面忘了放結構，可作安全補建（可留可刪）
+  if ($root.length === 0){
+    console.warn('[Lightbox] 找不到 #lb-root，請把提供的 HTML 結構貼進 body 內。');
     return;
   }
 
-  /* ========== 工具 ========== */
+  // ===== 工具
   const TL_ALIAS = { '33':'10','15':'12','20':'02','30':'18','24':'14','29':'04' };
-  const pad2 = (n) => String(n).padStart(2, '0');
-  const canonicalId = (id) => TL_ALIAS[id] || id;
-  const urlFor = (id) => `lightbox_${id}.html`;
+  const pad2 = n => String(n).padStart(2,'0');
+  const canonicalId = id => TL_ALIAS[id] || id;
+  const urlFor = id => `lightbox_${id}.html`;
 
   function idFromMark(el){ const m = el.className.match(/\bt_(\d+)\b/); return m ? pad2(m[1]) : null; }
   function idFromNum(el){  const m = el.className.match(/\bp_(\d+)\b/); return m ? pad2(m[1]) : null; }
@@ -1494,104 +1491,24 @@
     const $badge = $li.find('.badge').first();
     if (!$badge.length) return null;
     const txt = $badge.clone().children().remove().end().text().trim();
-    const n = parseInt(txt, 10);
+    const n = parseInt(txt,10);
     return Number.isNaN(n) ? null : pad2(n);
   }
 
-  function setLoading(on){ $root.toggleClass('is-loading', !!on); }
-  function showRoot(){ $('html,body').addClass('lb-open'); $root.addClass('is-open').attr('aria-hidden','false'); }
-  function hideRoot(){ $root.removeClass('is-open is-loading').attr('aria-hidden','true'); $('html,body').removeClass('lb-open'); $content.empty(); }
-
-  /* ========== 讓 innerHTML 插入的 <script> 真的執行 ========== */
-  function execInsertedScripts(rootEl){
-    const scripts = rootEl.querySelectorAll('script');
-    scripts.forEach(old => {
-      const s = document.createElement('script');
-      // 複製屬性（包含 src）
-      for (const attr of old.attributes) s.setAttribute(attr.name, attr.value);
-      s.removeAttribute('defer'); // 動態插入不吃 defer
-      if (old.textContent) s.text = old.textContent; // 內嵌腳本
-      old.parentNode.replaceChild(s, old); // 插入即執行
-    });
+  function setLoading(on){
+    $root.toggleClass('is-loading', !!on);
+  }
+  function showRoot(){
+    $('html,body').addClass('lb-open');
+    $root.addClass('is-open').attr('aria-hidden','false');
+  }
+  function hideRoot(){
+    $root.removeClass('is-open is-loading').attr('aria-hidden','true');
+    $('html,body').removeClass('lb-open');
+    $content.empty();
   }
 
-  /* ========== 自動補「上一頁/下一頁」：父頁 Overlay 版（iframe/內頁失敗時啟用） ========== */
-  function injectPagerCSSOnce(){
-    if (document.getElementById('lb-pager-inline')) return;
-    const css = `
-      #lb-root .lb-content{position:relative;}
-      #lb-root .lb-pager{position:absolute; inset:0; pointer-events:none; z-index:5;}
-      #lb-root .lb-pager a{
-        position:absolute; top:50%; transform:translateY(-50%);
-        width:46px; height:76px; display:flex; align-items:center; justify-content:center;
-        background:rgba(255,255,255,.35); border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,.25);
-        pointer-events:auto; text-decoration:none; color:#111; transition:background .2s, opacity .2s;
-      }
-      #lb-root .lb-pager a.prev{left:10px}
-      #lb-root .lb-pager a.next{right:10px}
-      #lb-root .lb-pager a:hover{background:rgba(255,255,255,.55)}
-      #lb-root .lb-pager a[aria-disabled="true"]{opacity:.35; pointer-events:none}
-    `;
-    const style = document.createElement('style');
-    style.id = 'lb-pager-inline';
-    style.textContent = css;
-    document.head.appendChild(style);
-  }
-  const ICON_PREV = `<svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true"><path d="M16 8 Q16 6 14.4 7.2 L9.6 10.8 Q8 12 9.6 13.2 L14.4 16.8 Q16 18 16 16 Z"/></svg>`;
-  const ICON_NEXT = `<svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true"><path d="M8 8 Q8 6 9.6 7.2 L14.4 10.8 Q16 12 14.4 13.2 L9.6 16.8 Q8 18 8 16 Z"/></svg>`;
-
-  function buildOverlayPager(currentId){
-    // 若內頁已經自己生出 .lb-pager，就不再補
-    if ($content.find('.lb-pager').length) return;
-
-    injectPagerCSSOnce();
-
-    const padLen = String(currentId).length;        // 目前 id 的位數（通常 2）
-    const curNum = parseInt(currentId, 10);
-
-    const prevNum = PAGER_WRAP ? (curNum === PAGER_MIN ? PAGER_MAX : curNum - 1)
-                               : (curNum >  PAGER_MIN ? curNum - 1 : null);
-    const nextNum = PAGER_WRAP ? (curNum === PAGER_MAX ? PAGER_MIN : curNum + 1)
-                               : (curNum <  PAGER_MAX ? curNum + 1 : null);
-    const fmt = (n)=> String(n).padStart(padLen, '0');
-
-    const nav = document.createElement('nav');
-    nav.className = 'lb-pager __fallback';
-    nav.setAttribute('aria-label','上一頁 / 下一頁');
-
-    const aPrev = document.createElement('a');
-    aPrev.className = 'prev'; aPrev.innerHTML = ICON_PREV; aPrev.setAttribute('aria-label','上一頁');
-    if (prevNum){ aPrev.href='#'; aPrev.dataset.id = fmt(prevNum); } else { aPrev.setAttribute('aria-disabled','true'); }
-
-    const aNext = document.createElement('a');
-    aNext.className = 'next'; aNext.innerHTML = ICON_NEXT; aNext.setAttribute('aria-label','下一頁');
-    if (nextNum){ aNext.href='#'; aNext.dataset.id = fmt(nextNum); } else { aNext.setAttribute('aria-disabled','true'); }
-
-    nav.appendChild(aPrev); nav.appendChild(aNext);
-
-    // 儘量掛在內頁的 .lightbox_bg 上，沒有就掛在 .lb-content
-    const host = $content.find('.lightbox_bg').get(0) || $content.get(0);
-    host.appendChild(nav);
-
-    // 點擊用父頁的 openLightboxById 切頁
-    nav.addEventListener('click', (e)=>{
-      const a = e.target.closest('a');
-      if (!a) return;
-      if (a.getAttribute('aria-disabled') === 'true') { e.preventDefault(); return; }
-      e.preventDefault();
-      openLightboxById(a.dataset.id);
-    });
-
-    // 鍵盤（左右）
-    const handler = (e)=>{
-      if (!$root.hasClass('is-open')) { document.removeEventListener('keydown', handler); return; }
-      if (e.key === 'ArrowLeft'  && prevNum) openLightboxById(fmt(prevNum));
-      if (e.key === 'ArrowRight' && nextNum) openLightboxById(fmt(nextNum));
-    };
-    document.addEventListener('keydown', handler);
-  }
-
-  /* ========== 從 #lb-pool 抓片段（可選） ========== */
+  // 優先使用 #lb-pool 內的片段
   function tryLoadFromPool(id){
     const $pool = $('#lb-pool');
     if (!$pool.length) return false;
@@ -1601,73 +1518,61 @@
     return true;
   }
 
-  /* ========== 遠端載入 ========== */
+  // http(s)：fetch → 成功就塞字串，失敗 fallback iframe
   async function loadRemote(id){
     const url = urlFor(id);
-
-    // 本機 file:// 改用 iframe 避免 CORS
-    if (location.protocol === 'file:') {
+    if (location.protocol === 'file:'){
+      // 本機：避免 CORS，直接 iframe
       $content.html(`<iframe class="lb-iframe" src="${url}" title="Lightbox ${id}" loading="lazy"></iframe>`);
-      // 直接補父頁 Overlay 版
-      buildOverlayPager(id);
       return;
     }
-
-    try {
+    try{
       const res = await fetch(url, { cache: 'no-store' });
       if (!res.ok) throw new Error(res.statusText);
       const html = await res.text();
       $content.html(html);
-      execInsertedScripts($content.get(0));   // 讓內頁 <script>（含 lb-pager.js）執行
-
-      // 等 0.1~0.8s 看內頁是否自己生出 .lb-pager；沒有就補一組
-      let tries = 0;
-      const timer = setInterval(() => {
-        tries++;
-        if ($content.find('.lb-pager').length) { clearInterval(timer); return; }
-        if (tries >= 8) { clearInterval(timer); buildOverlayPager(id); }
-      }, 100);
-    } catch (err) {
-      // 失敗就 iframe（同樣補 Overlay）
+    }catch(err){
+      // 失敗就改用 iframe
       $content.html(`<iframe class="lb-iframe" src="${url}" title="Lightbox ${id}" loading="lazy"></iframe>`);
-      buildOverlayPager(id);
     }
   }
 
-  /* ========== 對外：開啟某一個 ID 的 lightbox ========== */
   function openLightboxById(rawId){
     if (!rawId) return;
-    const id = canonicalId(rawId); // 例如 20 會轉為 02（若你有別名）
+    const id = canonicalId(rawId);
     showRoot();
     setLoading(true);
 
-    // 清掉上一次 fallback pager（避免重複）
-    $content.find('.lb-pager.__fallback').remove();
-
-    if (tryLoadFromPool(id)) {
+    // 先試 pool，再遠端
+    if (tryLoadFromPool(id)){
       setLoading(false);
-      // pool 情境也補同樣保險
-      setTimeout(() => {
-        if (!$content.find('.lb-pager').length) buildOverlayPager(id);
-      }, 150);
-    } else {
+    }else{
       loadRemote(id).finally(() => setLoading(false));
     }
   }
-  window.openLightboxById = openLightboxById;
+  window.openLightboxById = openLightboxById; // 若你想從別處手動呼叫
 
-  /* ========== 關閉 ========== */
+  // ===== 關閉行為
   $mask.on('click', hideRoot);
   $close.on('click', hideRoot);
   $(document).on('keydown', function(e){
     if (e.key === 'Escape' && $root.hasClass('is-open')) hideRoot();
   });
 
-  /* ========== 三種觸發點：pin / num / timeline ========== */
-  $('.mark_area').on('click', 'a', function(e){ e.preventDefault(); const id = idFromMark(this); if (id) openLightboxById(id); });
-  $('.num_area').on('click', 'p', function(){   const id = idFromNum(this);  if (id) openLightboxById(id); });
-  $('.timeline').on('click', 'li.stop', function(){ const id = idFromStop($(this)); if (id) openLightboxById(id); });
-
+  // ===== 三種觸發點
+  $('.mark_area').on('click', 'a', function(e){
+    e.preventDefault();
+    const id = idFromMark(this);
+    if (id) openLightboxById(id);
+  });
+  $('.num_area').on('click', 'p', function(){
+    const id = idFromNum(this);
+    if (id) openLightboxById(id);
+  });
+  $('.timeline').on('click', 'li.stop', function(){
+    const id = idFromStop($(this));
+    if (id) openLightboxById(id);
+  });
 })(jQuery);
 </script>
 
