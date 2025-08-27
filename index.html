@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="v1/css/colorbox.css">
   <link rel="stylesheet" href="v1/css/font.css">
   <!-- For PDC content -->
-  <link rel="stylesheet" href="v1/css/hd-style_pdc.css">
+  <link rel="stylesheet" href="v1/css/ak_travel.css">
   <script src="v1/lib/jquery-3.7.0.min.js"></script>
 <!--   <div class="web_box"> -->
   <div id="AK" class="clear-style">
@@ -1801,5 +1801,49 @@
     if (MQ.matches) arm();
     (MQ.addEventListener ? MQ.addEventListener('change', onMQ) : MQ.addListener(onMQ));
   });
+})();
+</script>
+
+<script>
+(() => {
+  const container = document.querySelector('#lb-root .lb-content');
+  if (!container) return;
+
+  function prep(img){
+    // 避免重複綁定
+    if (img.dataset.lbBound) return;
+    img.dataset.lbBound = '1';
+
+    // 盡量提高載入優先度（不會影響相容性）
+    if (!img.hasAttribute('loading'))       img.loading = 'eager';
+    if (!img.hasAttribute('decoding'))      img.decoding = 'async';
+    if (!img.hasAttribute('fetchpriority')) img.setAttribute('fetchpriority','high');
+
+    const reveal = () => img.classList.add('lb-ready');
+
+    // 已經載好 → 直接 decode 再顯示
+    if (img.complete && img.naturalWidth > 0){
+      if (img.decode) img.decode().then(reveal).catch(reveal);
+      else reveal();
+      return;
+    }
+
+    // 尚未載好 → 等 load 後再 decode
+    img.addEventListener('load', () => {
+      if (img.decode) img.decode().then(reveal).catch(reveal);
+      else reveal();
+    }, { once:true });
+
+    // 出錯也不要卡住 UI
+    img.addEventListener('error', reveal, { once:true });
+  }
+
+  // 掃描目前已存在的圖片
+  function scan(){ container.querySelectorAll('img').forEach(prep); }
+  scan();
+
+  // 監看 lightbox 內容變化（你開啟燈箱時注入的 HTML/IMG 都會被預載）
+  const mo = new MutationObserver(scan);
+  mo.observe(container, { childList:true, subtree:true });
 })();
 </script>
