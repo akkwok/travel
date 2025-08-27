@@ -1847,3 +1847,56 @@
   mo.observe(container, { childList:true, subtree:true });
 })();
 </script>
+
+<script>
+(function(){
+  const root    = document.getElementById('lb-root');
+  if (!root) return;
+
+  const stage   = root.querySelector('.lb-stage');   // 燈箱可捲動容器（通常 90vh、高度固定、overflow:auto）
+  const content = root.querySelector('.lb-content'); // 你把 lightbox_XX.html 塞進來的容器
+
+  function resetTop(){
+    if (!stage) return;
+
+    // 避免平滑滾動干擾：暫時設成 auto
+    const prev = stage.style.scrollBehavior;
+    stage.style.scrollBehavior = 'auto';
+
+    // 把燈箱與內容都拉回頂端
+    stage.scrollTop = 0;
+    if (content) content.scrollTop = 0;
+
+    // 若你的 lightbox 沒鎖 body 捲動，也把整頁拉到頂（保險）
+    window.scrollTo(0, 0);
+
+    // 再補兩次，避免圖片解碼後高度變動把位置「擠下去」
+    requestAnimationFrame(() => {
+      stage.scrollTop = 0;
+      if (content) content.scrollTop = 0;
+    });
+    setTimeout(() => {
+      stage.scrollTop = 0;
+      if (content) content.scrollTop = 0;
+      stage.style.scrollBehavior = prev; // 還原
+    }, 120);
+  }
+
+  // A) 如果你有上下頁按鈕，點擊當下先回頂一次（class 可換成你實際的）
+  root.addEventListener('click', (e) => {
+    const btn = e.target.closest('.lb-nav-prev, .lb-nav-next');
+    if (!btn) return;
+    resetTop();
+    // 真正新內容換進來時，B 會再回頂一次（雙保險）
+  });
+
+  // B) 任何時候 .lb-content 被換入新節點（切換到另一個 lightbox_XX.html），就自動回頂
+  if (content){
+    const mo = new MutationObserver(() => resetTop());
+    mo.observe(content, { childList:true, subtree:true });
+  }
+
+  // C)（可選）若你自己的載入程式會 dispatch 自訂事件，也可監聽
+  root.addEventListener('lb:content:loaded', resetTop);
+})();
+</script>
