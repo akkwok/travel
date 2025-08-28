@@ -4128,7 +4128,7 @@ li.tl-hover .card .meta li{
   display: block;
   z-index: 1; /* 蓋過遮罩 */
       border: 1px solid #1d7bcb;
-          max-width: 600px !important;
+          max-width: 1200px !important;
 }
 
 /* 關閉按鈕（修正看不見的問題：層級、底色、icon 顏色） */
