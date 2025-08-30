@@ -409,3 +409,6 @@ li.tl-hover .card .meta li{
   transform: translate(-50%, -50%); /* 置中 */
   border: 0;
 }
+
+/* 防止瀏覽器因為內容高度變動而自動調整捲動位置 */
+.video-figure, .video-card { overflow-anchor: none; }
