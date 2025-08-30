@@ -1857,6 +1857,12 @@
   const stage   = root.querySelector('.lb-stage');   // 燈箱可捲動容器（通常 90vh、高度固定、overflow:auto）
   const content = root.querySelector('.lb-content'); // 你把 lightbox_XX.html 塞進來的容器
 
+  // --- 白名單：若事件發生在影片播放相關區塊，就不觸發回頂 ---
+  function isVideoInteraction(ev){
+    // 影片播放按鈕 / 影片卡片 / <video> 本體 / 自動縮圖下載連結
+    return !!(ev.target && ev.target.closest && ev.target.closest('.video-play, .video-card, video, .poster-download'));
+  }
+
   function resetTop(){
     if (!stage) return;
 
@@ -1883,21 +1889,25 @@
     }, 120);
   }
 
-  // A) 如果你有上下頁按鈕，點擊當下先回頂一次（class 可換成你實際的）
+  // A) 上下頁按鈕：點擊時回頂（但先排除影片互動）
   root.addEventListener('click', (e) => {
+    // ⛔ 影片相關互動：直接略過，不要回頂
+    if (isVideoInteraction(e)) return;
+
     const btn = e.target.closest('.lb-nav-prev, .lb-nav-next');
     if (!btn) return;
+
     resetTop();
     // 真正新內容換進來時，B 會再回頂一次（雙保險）
-  });
+  }, false);
 
-  // B) 任何時候 .lb-content 被換入新節點（切換到另一個 lightbox_XX.html），就自動回頂
+  // B) 當 .lb-content 被換入新節點（切換到另一個 lightbox_XX.html），就自動回頂
   if (content){
     const mo = new MutationObserver(() => resetTop());
     mo.observe(content, { childList:true, subtree:true });
   }
 
-  // C)（可選）若你自己的載入程式會 dispatch 自訂事件，也可監聽
+  // C)（可選）若你的載入程式會 dispatch 自訂事件，也可監聽
   root.addEventListener('lb:content:loaded', resetTop);
 })();
 </script>
