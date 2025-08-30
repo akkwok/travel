@@ -412,3 +412,6 @@ li.tl-hover .card .meta li{
 
 /* 防止瀏覽器因為內容高度變動而自動調整捲動位置 */
 .video-figure, .video-card { overflow-anchor: none; }
+/* 避免瀏覽器因內容高度變動而自動校正捲動位置，造成輕微跳動 */
+#lb-root .lb-stage,
+#lb-root .lb-content { overflow-anchor: none; }
