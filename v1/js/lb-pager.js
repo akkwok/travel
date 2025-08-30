@@ -96,7 +96,7 @@
 })();
 
 
-/* ====== 影片就地替換播放（強化版） ====== */
+/* ====== 影片就地替換播放（穩定＋避免跳到頁首版） ====== */
 (function () {
   'use strict';
 
@@ -116,39 +116,28 @@
     s1.type = 'video/mp4';
     v.appendChild(s1);
 
-    // --- 錯誤處理（看得到原因 + 提供外開） ---
-    var onError = function (ev) {
-      var msg = '影片載入失敗';
-      try {
-        var code = (v.error && v.error.code) || 0;
-        var ns = v.networkState;
-        msg += '（errorCode=' + code + ', networkState=' + ns + '）';
-      } catch (_) {}
-      console.warn(msg, ev);
-
-      // 以文字提示 + 外開連結替代
+    // --- 錯誤處理：改成外開連結 ---
+    var onError = function () {
       var wrap = document.createElement('div');
       wrap.style.padding = '8px';
       wrap.innerHTML =
         '抱歉，影片無法播放。' +
-        '請 <a href="' + src + '" target="_blank" rel="noopener">改用外部開啟</a> 或稍後再試。';
+        '請 <a href="' + src + '" target="_blank" rel="noopener">改用外部開啟</a>。';
       if (v.parentNode) v.parentNode.replaceChild(wrap, v);
     };
-
     v.addEventListener('error', onError);
-    v.addEventListener('stalled', onError);
-    v.addEventListener('abort', onError);
-    v.addEventListener('emptied', onError);
-
-    // --- 加一點 UX：載入到可播時聚焦，方便鍵盤使用者 ---
-    v.addEventListener('canplay', function () {
-      v.focus();
-    });
 
     return v;
   }
 
-  function replaceBtnWithVideo(btn) {
+  function replaceBtnWithVideo(btn, ev) {
+    // --- 阻止冒泡與預設行為（避免打到其它 handler）---
+    if (ev) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      if (typeof ev.stopImmediatePropagation === 'function') ev.stopImmediatePropagation();
+    }
+
     var src = btn.getAttribute('data-video-src');
     var poster = btn.getAttribute('data-poster') || '';
     if (!src) {
@@ -156,43 +145,60 @@
       return;
     }
 
-    // 建立 video 元素
-    var video = createVideoEl(src, poster);
+    // --- 記住目前卷軸位置 ---
+    var holdY = window.scrollY || document.documentElement.scrollTop || 0;
 
-    // 用更穩定的方式替換節點
+    var video = createVideoEl(src, poster);
     var parent = btn.parentNode;
     parent.replaceChild(video, btn);
 
-    // 明確呼叫 load()，讓部分瀏覽器進入載入流程
     try { video.load(); } catch (_) {}
 
-    // 不自動播放（跨瀏覽器最穩），讓使用者按控制列播放
-    // 如要嘗試自動播放，可解開下列三行（仍建議保持 muted）：
-    // video.muted = true;
-    // video.setAttribute('muted', '');
-    // video.play && video.play().catch(function(){ /* 忽略策略拒絕 */ });
+    // 還原卷軸位置，避免跳動
+    window.scrollTo({ top: holdY, left: 0, behavior: 'auto' });
+
+    // 聚焦播放器但避免觸發捲動
+    try {
+      video.setAttribute('tabindex', '-1');
+      video.focus({ preventScroll: true });
+    } catch (_) {}
   }
 
-  function onActivate(e) {
-    if (e.type === 'click') return replaceBtnWithVideo(this);
-    if (e.type === 'keydown') {
-      var code = e.keyCode || e.which;
+  function onActivate(ev) {
+    // 擋掉預設/冒泡
+    ev.preventDefault();
+    ev.stopPropagation();
+    if (typeof ev.stopImmediatePropagation === 'function') ev.stopImmediatePropagation();
+
+    if (ev.type === 'click') return replaceBtnWithVideo(this, ev);
+
+    if (ev.type === 'keydown') {
+      var code = ev.keyCode || ev.which;
       if (code === 13 || code === 32) {
-        e.preventDefault();
-        return replaceBtnWithVideo(this);
+        return replaceBtnWithVideo(this, ev);
       }
     }
   }
 
-  // 事件委派（點縮圖 / 鍵盤）
-  document.addEventListener('click', function (ev) {
-    var btn = ev.target.closest && ev.target.closest('.video-play');
-    if (btn) onActivate.call(btn, ev);
-  }, false);
+  // ==== 事件委派：捕獲階段攔截，避免跑到其它全域監聽 ====
+  document.addEventListener(
+    'click',
+    function (ev) {
+      var btn = ev.target.closest && ev.target.closest('.video-play');
+      if (!btn) return;
+      onActivate.call(btn, ev);
+    },
+    true // 捕獲階段
+  );
 
-  document.addEventListener('keydown', function (ev) {
-    var ae = document.activeElement;
-    var btn = ae && ae.classList && ae.classList.contains('video-play') ? ae : null;
-    if (btn) onActivate.call(btn, ev);
-  }, false);
+  document.addEventListener(
+    'keydown',
+    function (ev) {
+      var ae = document.activeElement;
+      var btn = ae && ae.classList && ae.classList.contains('video-play') ? ae : null;
+      if (!btn) return;
+      onActivate.call(btn, ev);
+    },
+    true // 捕獲階段
+  );
 })();
