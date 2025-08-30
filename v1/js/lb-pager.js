@@ -96,135 +96,94 @@
 })();
 
 
-/* ============================================================
- * 影片就地替換播放（Netlify 也不跳＋一次點擊立即播放）
- * - 點縮圖（.video-play）→ 直接換成 <video> 並自動播放（靜音，使用者可再開聲）
- * - 捕獲階段攔截事件 + 阻止預設/冒泡，避免打到你的「捲到頂」全域監聽
- * - 置換時凍結外框高度 + 還原 scrollY，避免版面重排導致跳動
- * - 播放失敗時顯示外開連結
- * ============================================================ */
-(function () {
+/* ====== 影片就地替換播放（強化版） ====== */
+(function(){
   'use strict';
 
-  // 取得元素目前像素高度（含 padding，不含 margin）
-  function getRectHeight(el) {
-    return el ? el.getBoundingClientRect().height : 0;
-  }
-
-  // 建立 <video>
-  function createVideoEl(src, poster) {
+  function createVideoEl(src, poster){
     var v = document.createElement('video');
-    // 基本屬性：跨裝置最穩定
+
+    // ===== 可存取與跨裝置設定 =====
     v.setAttribute('controls', '');
-    v.setAttribute('playsinline', ''); // iOS 內嵌
-    v.playsInline = true;
+    v.setAttribute('playsinline', ''); // iOS 屬性
+    v.playsInline = true;              // iOS 對應的 DOM 屬性（兩者都設較穩）
     v.setAttribute('preload', 'metadata');
+    v.setAttribute('autoplay', '');    // 嘗試自動播放（若失敗會降級）
+    v.setAttribute('muted', '');       // 為了通過自動播放策略，先預設靜音
+    v.muted = true;                    // 同上，DOM 屬性也設
+    v.setAttribute('crossorigin', 'anonymous'); // 搭配 jsDelivr 可避免未來擷取縮圖時的 CORS 汙染
     if (poster) v.setAttribute('poster', poster);
 
-    // 一次點擊就能播放：先靜音，符合各瀏覽器自動播放策略
-    v.muted = true;
-    v.setAttribute('muted', '');
+    // ===== 直接指定 src（避免部分瀏覽器對 <source> 的兼容坑）=====
+    v.src = src;
+    v.type = 'video/mp4';
 
-    // 用 <source>（相容性最好）
-    var s1 = document.createElement('source');
-    s1.src = src;
-    s1.type = 'video/mp4';
-    v.appendChild(s1);
-
-    // 錯誤回退：改成外開連結
-    var onError = function () {
-      var wrap = document.createElement('div');
-      wrap.style.padding = '8px';
-      wrap.innerHTML =
-        '抱歉，影片無法播放。' +
-        '請 <a href="' + src + '" target="_blank" rel="noopener">改用外部開啟</a>。';
-      if (v.parentNode) v.parentNode.replaceChild(wrap, v);
-    };
-    v.addEventListener('error', onError);
-    v.addEventListener('stalled', onError);
-    v.addEventListener('abort', onError);
-    v.addEventListener('emptied', onError);
-
-    // 使用者第一次點影片畫面時，嘗試解除靜音（可選）
-    v.addEventListener('click', function () {
-      if (!v.paused && v.muted) { try { v.muted = false; } catch (_) {} }
-    }, { once: true });
+    // ===== 簡易 fallback：提供下載或外開連結 =====
+    var p = document.createElement('p');
+    p.style.padding = '8px';
+    p.innerHTML = '若影片無法播放，請 <a href="'+src+'" target="_blank" rel="noopener">改用外部開啟</a>。';
+    v.appendChild(p);
 
     return v;
   }
 
-  function activateVideo(btn, ev) {
-    // —— 完全攔截這次互動，避免打到其它全域 handler（如捲到頂）——
-    if (ev) {
-      ev.preventDefault();
-      ev.stopPropagation();
-      if (typeof ev.stopImmediatePropagation === 'function') ev.stopImmediatePropagation();
-    }
-
+  function replaceBtnWithVideo(btn){
     var src = btn.getAttribute('data-video-src');
     var poster = btn.getAttribute('data-poster') || '';
-    if (!src) { alert('找不到影片來源（data-video-src）。'); return; }
+    if (!src){
+      alert('找不到影片來源（data-video-src）。請確認路徑或改用 YouTube 方案。');
+      return;
+    }
 
-    // 記住目前卷軸位置
-    var holdY = window.scrollY || document.documentElement.scrollTop || 0;
-
-    // 凍結外框高度，避免置換造成重排跳動
-    var figure = btn.closest('.video-figure') || btn.parentNode;
-    var h = getRectHeight(figure);
-    if (figure && h > 0) figure.style.height = h + 'px';
-
-    // 置換成 <video>
     var video = createVideoEl(src, poster);
+
+    // 用更穩定的方式替換節點
     var parent = btn.parentNode;
     parent.replaceChild(video, btn);
 
-    // 立刻載入並嘗試自動播放（一次點擊即播）
-    try { video.load(); } catch (_) {}
-    var pp = video.play && video.play();
-    if (pp && typeof pp.catch === 'function') {
-      pp.catch(function () {
-        // 若被政策拒絕，保留控制列，使用者可手動播放
+    // 部分瀏覽器需要先 load() 再嘗試 play()
+    try {
+      video.load();
+    } catch(_) {}
+
+    // 嘗試播放；若被策略拒絕，再退一步讓使用者手動播放
+    var tryPlay = video.play && video.play();
+    if (tryPlay && typeof tryPlay.then === 'function'){
+      tryPlay.then(function(){
+        // 自動播放成功：若你想要有聲，這裡可在第一幀後解除靜音（可選）
+        // setTimeout(()=>{ video.muted = false; }, 300);
+      }).catch(function(){
+        // 自動播放被拒：移除 autoplay，保留 controls，讓使用者點擊播放
+        video.removeAttribute('autoplay');
+        // 也可以保留 muted 以避免再次被策略擋住（使用者可手動開聲）
       });
     }
 
-    // 強制還原卷軸位置（兩次，確保不同瀏覽器都不跳）
-    window.scrollTo({ top: holdY, left: 0, behavior: 'auto' });
-    requestAnimationFrame(function () {
-      window.scrollTo({ top: holdY, left: 0, behavior: 'auto' });
-    });
-
-    // 聚焦播放器但避免觸發捲動
-    try {
-      video.setAttribute('tabindex', '-1');
-      if (video.focus) video.focus({ preventScroll: true });
-    } catch (_) {}
-
-    // 當可播放後，解除高度凍結
-    var unlock = function () {
-      if (figure) figure.style.height = '';
-      video.removeEventListener('loadedmetadata', unlock);
-      video.removeEventListener('canplay', unlock);
-      video.removeEventListener('playing', unlock);
-    };
-    video.addEventListener('loadedmetadata', unlock);
-    video.addEventListener('canplay', unlock);
-    video.addEventListener('playing', unlock);
+    // 聚焦到播放器，提升鍵盤可用性
+    video.focus();
   }
 
-  // 捕獲階段先攔截 click/keydown，避免觸發你頁面其它「捲到頂」監聽
-  document.addEventListener('click', function (ev) {
-    var btn = ev.target.closest && ev.target.closest('.video-play');
-    if (!btn) return;
-    activateVideo.call(btn, btn, ev);
-  }, true);
+  function onActivate(e){
+    if (e.type === 'click') return replaceBtnWithVideo(this);
 
-  document.addEventListener('keydown', function (ev) {
+    if (e.type === 'keydown'){
+      var code = e.keyCode || e.which;
+      if (code === 13 || code === 32){
+        e.preventDefault();
+        return replaceBtnWithVideo(this);
+      }
+    }
+  }
+
+  // 事件委派
+  document.addEventListener('click', function(ev){
+    var btn = ev.target.closest && ev.target.closest('.video-play');
+    if (btn) onActivate.call(btn, ev);
+  }, false);
+
+  document.addEventListener('keydown', function(ev){
     var ae = document.activeElement;
     var btn = ae && ae.classList && ae.classList.contains('video-play') ? ae : null;
-    if (!btn) return;
-    var code = ev.keyCode || ev.which;
-    if (code === 13 || code === 32) {  // Enter / Space
-      activateVideo.call(btn, btn, ev);
-    }
-  }, true);
+    if (btn) onActivate.call(btn, ev);
+  }, false);
 })();
