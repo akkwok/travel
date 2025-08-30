@@ -94,3 +94,96 @@
     }
   });
 })();
+
+
+/* ====== 影片就地替換播放（強化版） ====== */
+(function(){
+  'use strict';
+
+  function createVideoEl(src, poster){
+    var v = document.createElement('video');
+
+    // ===== 可存取與跨裝置設定 =====
+    v.setAttribute('controls', '');
+    v.setAttribute('playsinline', ''); // iOS 屬性
+    v.playsInline = true;              // iOS 對應的 DOM 屬性（兩者都設較穩）
+    v.setAttribute('preload', 'metadata');
+    v.setAttribute('autoplay', '');    // 嘗試自動播放（若失敗會降級）
+    v.setAttribute('muted', '');       // 為了通過自動播放策略，先預設靜音
+    v.muted = true;                    // 同上，DOM 屬性也設
+    v.setAttribute('crossorigin', 'anonymous'); // 搭配 jsDelivr 可避免未來擷取縮圖時的 CORS 汙染
+    if (poster) v.setAttribute('poster', poster);
+
+    // ===== 直接指定 src（避免部分瀏覽器對 <source> 的兼容坑）=====
+    v.src = src;
+    v.type = 'video/mp4';
+
+    // ===== 簡易 fallback：提供下載或外開連結 =====
+    var p = document.createElement('p');
+    p.style.padding = '8px';
+    p.innerHTML = '若影片無法播放，請 <a href="'+src+'" target="_blank" rel="noopener">改用外部開啟</a>。';
+    v.appendChild(p);
+
+    return v;
+  }
+
+  function replaceBtnWithVideo(btn){
+    var src = btn.getAttribute('data-video-src');
+    var poster = btn.getAttribute('data-poster') || '';
+    if (!src){
+      alert('找不到影片來源（data-video-src）。請確認路徑或改用 YouTube 方案。');
+      return;
+    }
+
+    var video = createVideoEl(src, poster);
+
+    // 用更穩定的方式替換節點
+    var parent = btn.parentNode;
+    parent.replaceChild(video, btn);
+
+    // 部分瀏覽器需要先 load() 再嘗試 play()
+    try {
+      video.load();
+    } catch(_) {}
+
+    // 嘗試播放；若被策略拒絕，再退一步讓使用者手動播放
+    var tryPlay = video.play && video.play();
+    if (tryPlay && typeof tryPlay.then === 'function'){
+      tryPlay.then(function(){
+        // 自動播放成功：若你想要有聲，這裡可在第一幀後解除靜音（可選）
+        // setTimeout(()=>{ video.muted = false; }, 300);
+      }).catch(function(){
+        // 自動播放被拒：移除 autoplay，保留 controls，讓使用者點擊播放
+        video.removeAttribute('autoplay');
+        // 也可以保留 muted 以避免再次被策略擋住（使用者可手動開聲）
+      });
+    }
+
+    // 聚焦到播放器，提升鍵盤可用性
+    video.focus();
+  }
+
+  function onActivate(e){
+    if (e.type === 'click') return replaceBtnWithVideo(this);
+
+    if (e.type === 'keydown'){
+      var code = e.keyCode || e.which;
+      if (code === 13 || code === 32){
+        e.preventDefault();
+        return replaceBtnWithVideo(this);
+      }
+    }
+  }
+
+  // 事件委派
+  document.addEventListener('click', function(ev){
+    var btn = ev.target.closest && ev.target.closest('.video-play');
+    if (btn) onActivate.call(btn, ev);
+  }, false);
+
+  document.addEventListener('keydown', function(ev){
+    var ae = document.activeElement;
+    var btn = ae && ae.classList && ae.classList.contains('video-play') ? ae : null;
+    if (btn) onActivate.call(btn, ev);
+  }, false);
+})();
