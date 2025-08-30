@@ -329,8 +329,10 @@ li.tl-hover .card .meta li{
   overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
 }
 
-.video-card .video-figure { position: relative;     width: 100%;
-    margin: 0;}
+.video-card .video-figure { position: relative; width: 100%; margin: 0; text-align: center;}
+.video-card .video-figure iframe{
+    width: calc(100% - 4px);
+}
 .video-card .video-play {
   /* 按鈕重置，讓整塊縮圖可點且可聚焦 */
   display: inline-block;
@@ -372,4 +374,38 @@ li.tl-hover .card .meta li{
   width: 100%;
   height: auto;
   border-radius: 8px;
+}
+
+/* 外框 9:16，與 Shorts 畫面一致，避免左右留白 */
+.yt-box{
+  position: relative;
+  width: 100%;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.yt-916{ aspect-ratio: 9/16; }   /* 直式外框 */
+.yt-box > iframe{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border: 0;
+}
+
+/* 外框 16:9 */
+.yt-169{ aspect-ratio: 16/9; }
+
+/* Cover Hack：放大並置中位移，裁掉黑邊以達滿版效果 */
+.yt-cover{
+  position: relative;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.yt-cover > iframe{
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 177.78%;   /* 16:9 外框要鋪滿，寬放大到 100% * (16/9) */
+  height: 100%;
+  transform: translate(-50%, -50%); /* 置中 */
+  border: 0;
 }
