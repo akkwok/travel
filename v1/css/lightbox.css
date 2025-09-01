@@ -55,6 +55,7 @@ h4, .h4 {
     --durX: 5s;
     animation: car-drift-x var(--durX) ease-in-out infinite alternate;
     will-change: transform;
+    background: none;
 }
 
 /* 橫向移動關鍵影格（from→to，來回往返） */
