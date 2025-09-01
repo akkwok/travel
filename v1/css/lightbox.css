@@ -31,6 +31,62 @@ h4, .h4 {
     display: inline-block;
     width: calc(100% - 36px);
 }
+/* ========= 節點（stop） ========= */
+.lightbox_bg .stop{
+      display: flex;
+    position: relative;
+    flex-direction: column;
+    cursor: pointer;
+    /* padding-left: 10px !important; */
+}
+/* .stop:hover{
+    background: rgba(0, 0, 0, 0.2);
+} */
+/* ===== 外層：左右連續平滑移動 ===== */
+.lightbox_bg .car-wrap{
+        position: absolute;
+    top: 45px;
+    left: 165px;
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    --ampX: 14px;
+    --durX: 5s;
+    animation: car-drift-x var(--durX) ease-in-out infinite alternate;
+    will-change: transform;
+}
+
+/* 橫向移動關鍵影格（from→to，來回往返） */
+@keyframes car-drift-x{
+  from { transform: translateX(calc(var(--ampX) * -1)); } /* 從左側開始 */
+  to   { transform: translateX(var(--ampX)); }            /* 到右側結束 */
+}
+
+/* ===== 內層：引擎快速微震（上下抖動） ===== */
+.lightbox_bg .ico_car{
+  display: block;
+  max-width: 26px !important;
+border: none !important;
+  /* 可調參數：抖動幅度與週期（短＝更快） */
+  --ampY: 1px;     /* 上下幅度（很小就有發動感） */
+  --durY: 0.10s;   /* 週期（100ms，快速） */
+
+  animation: car-vibe-y var(--durY) linear infinite;
+  will-change: transform;
+}
+
+/* 上下抖動關鍵影格（快、幅度小） */
+@keyframes car-vibe-y{
+  from { transform: translateY(0); }
+  to   { transform: translateY(calc(var(--ampY) * -1)); }
+}
+
+/* 使用者偏好：減少動態時關閉動畫（WCAG 友善） */
+@media (prefers-reduced-motion: reduce){
+  .lightbox_bg .car-wrap, .lightbox_bg .ico_car { animation: none; }
+}
+
 .lightbox_bg.none_info{
  	height: 100%;
  	display: flex;
@@ -39,7 +95,7 @@ h4, .h4 {
 }
 .lightbox_bg img{
 	    width: calc(100% - 6px);
-    border-radius: 6px;
+    border-radius: 0px;
     border: 4px #fff solid;
     margin-bottom: 0.5em;
 }
@@ -60,6 +116,7 @@ h4, .h4 {
 	font-family: "Roboto";
 	margin: 0;
 	text-align: left;
+  position: relative;
 }
 .lightbox_bg .info{
 	background: rgb(0 11 20 / 50%);
