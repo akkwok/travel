@@ -310,14 +310,14 @@ li.tl-hover .card .meta li{
 }
 
 /* RWD：視寬改欄數（可依設計值微調斷點） */
-@media (max-width: 1200px){
-  .pic_group{ --cols: 2; }
+@media (max-width: 1170px){
+  .pic_group{ --cols: 2!important; }
 }
 @media (max-width: 900px){
-  .pic_group{ --cols: 2; }
+  .pic_group{ --cols: 1 !important; }
 }
 @media (max-width: 560px){
-  .pic_group{ --cols: 1; }
+  .pic_group{ --cols: 1 !important; }
 }
 
 /* 無障礙：使用者偏好減少動畫時，本元件無動畫，僅保留樣式 */
@@ -473,3 +473,65 @@ li.tl-hover .card .meta li{
 /* 避免瀏覽器因內容高度變動而自動校正捲動位置，造成輕微跳動 */
 #lb-root .lb-stage,
 #lb-root .lb-content { overflow-anchor: none; }
+
+/**/
+  /* 只在這個 lightbox 片段內生效 */
+  .pg{ --cols:3; }
+
+  /* 隱藏控制用的 radio（仍可被 label 切換） */
+  .pg .pg-radio{
+    position:absolute; width:0; height:0; opacity:0; pointer-events:none;
+  }
+
+  /* 工具列 */
+  .pg-toolbar{
+    display:flex; gap:8px; justify-content:flex-end;
+    margin: 0 0 12px;
+  }
+  .pg-toolbar .pg-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, .8);
+    cursor: pointer;
+    user-select: none;
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1;
+}
+
+  /* 讓被選中的那顆有高亮狀態（靠 radio ~ label） */
+  .pg #pg-2:checked ~ .pg-toolbar label[for="pg-2"],
+  .pg #pg-3:checked ~ .pg-toolbar label[for="pg-3"],
+  .pg #pg-4:checked ~ .pg-toolbar label[for="pg-4"]{
+   background: rgba(0, 0, 0, .8); 
+   color: var(--cor_love);
+  }
+
+  /* 用 radio 決定欄數（radio ~ .pic_group） */
+  .pg #pg-2:checked ~ .pic_group{ --cols:2; }
+  .pg #pg-3:checked ~ .pic_group{ --cols:3; }
+  .pg #pg-4:checked ~ .pic_group{ --cols:4; }
+
+  /* 圖片群組：用 --cols 控制欄數 */
+  .pg .pic_group{
+    /* display:grid; */
+    /* grid-template-columns: repeat(var(--cols, 3), minmax(0,1fr));
+    gap:12px;
+    list-style:none; padding:0; margin:0; */
+  }
+  /* .pg .pic_group li{ margin:0; }
+  .pg .pic_group img{
+    display:block; width:100%; height:auto; border-radius:8px;
+  } */
+
+  /* 可選：窄螢幕上限 2 欄 */
+  @media (max-width: 1170px){
+    .pg-toolbar{
+      display: none;
+    }
+  }
