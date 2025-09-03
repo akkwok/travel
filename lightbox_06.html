@@ -12,100 +12,106 @@
             <li>Friday Beach</li>
         </ul>
     </article>
-    <ul class="pic_group">
-        <li><img src="v1/img/pic/p06/pic_06_01.jpg" alt="">
-            <div class="info">
-                <!-- <p class="date">撰寫日期:2017.05.09</p> -->
-                <h2>兄弟之島</h2>
-                <p>
-                    ㄟ~要不要出國玩? 喔~走!!<br>
-                    就這樣兄弟兩來到了長灘島 XD<br>
-                    這次旅程太多傻眼與笑點...<br>
-                    <p class="tag"># 入關時海關人員滿臉困惑</p>
-                    <p class="tag"># 被飯店員工要FB</p>
-                    <p class="tag"># 被航警攔下要電話</p>
-                    <p class="tag"># 東南亞小王子再度發威</p>
-                    <p class="tag"># 房間鑰匙丟在沙灘找到快往生</p>
-                    <p class="tag"># 最後颱風來襲倉皇而逃</p>
-                </p>
-            </div>
-        </li>
-        <li><img src="v1/img/pic/p06/pic_06_02.jpg" alt="">
-            <div class="info">
-                <p class="tag"># 豔遇不斷</p>
-            </div>
-        </li>
-        <li><img src="v1/img/pic/p06/pic_06_03.jpg" alt="">
-            <div class="info">
-                <p class="tag"># shot、shot...嚇嚇嚇</p>
-            </div>
-        </li>
-        <li><img src="v1/img/pic/p06/pic_06_05.jpg" alt="">
-            <div class="info">
-                <p class="tag"># 堆完後鑰匙也埋了</p>
-            </div>
-        </li>
-        <li><img src="v1/img/pic/p06/pic_06_07.jpg" alt="">
-            <div class="info">
-                <p class="tag"># 沒什麼事~單純想放</p>
-            </div>
-        </li>
-        <li> <img src="v1/img/pic/p06/pic_06_08.jpg" alt="">
-            <div class="info">
-                <p>度假模式 ON，在大廳放空滑一下。</p>
-                <p class="tag"># 菲律賓 長灘島 飯店大廳</p>
-            </div>
-        </li>
-        <li> <img src="v1/img/pic/p06/pic_06_09.jpg" alt="">
-            <div class="info">
-                <p>白沙灘初見面，天空海一色。</p>
-                <p class="tag"># 菲律賓 長灘島 White Beach</p>
-            </div>
-        </li>
-        <li> <img src="v1/img/pic/p06/pic_06_10.jpg" alt="">
-            <div class="info">
-                <p>落日把海面染成粉紫色，太美。</p>
-                <p class="tag"># 菲律賓 長灘島 White Beach 日落</p>
-            </div>
-        </li>
-        <li> <img src="v1/img/pic/p06/pic_06_11.jpg" alt="">
-            <div class="info">
-                <p>風帆剪影陪著晚霞，看見最浪漫的長灘黃昏。</p>
-                <p class="tag"># 菲律賓 長灘島 White Beach 帆船夕陽</p>
-            </div>
-        </li>
-        <li><img src="v1/img/pic/p06/pic_06_04.jpg" alt="">
-            <div class="info">
-                <p class="tag"># 暴風雨前的寧靜</p>
-            </div>
-        </li>
-        <li><img src="v1/img/pic/p06/pic_06_06.jpg" alt="">
-            <div class="info">
-                <p class="tag"># 兄弟情之風雲變色</p>
-            </div>
-        </li>
-        <li class="video-card">
-            <figure class="video-figure">
-              <video
-                controls
-                playsinline
-                preload="metadata"
-                poster="v1/img/pic/p06/pic_mp4_01.jpg"
-                width="100%">
-                <source src="https://cdn.jsdelivr.net/gh/akkwok/travel@main/v1/img/pic/p06/pic_mp4_01.mp4" type="video/mp4">
-                抱歉，您的瀏覽器不支援影片播放，
-                <a href="https://cdn.jsdelivr.net/gh/akkwok/travel@main/v1/img/pic/p06/pic_mp4_01.mp4" target="_blank" rel="noopener">請改用外部開啟</a>。
-              </video>
-
-              <figcaption class="sr-only">
-                長灘島旅遊影片－颱風來了!
-              </figcaption>
-            </figure>
-          <div class="info">
-            <p class="tag"># 颱風來了~金恐怖!!!</p>
-          </div>
-        </li>
-    </ul>    
+    <div class="pg">
+        <!-- 三顆隱藏的 radio，預設勾 3 欄 -->
+        <input class="pg-radio" type="radio" id="pg-2" name="pg-cols" checked>
+        <input class="pg-radio" type="radio" id="pg-3" name="pg-cols">
+        <input class="pg-radio" type="radio" id="pg-4" name="pg-cols">
+        <!-- 工具列（label 的 for 會對應到上面的 radio） -->
+        <div class="pg-toolbar" role="group" aria-label="欄數切換">
+            <label class="pg-btn" for="pg-2">2</label>
+            <label class="pg-btn" for="pg-3">3</label>
+            <label class="pg-btn" for="pg-4">4</label>
+        </div>
+        <ul class="pic_group">
+            <li><img src="v1/img/pic/p06/pic_06_01.jpg" alt="">
+                <div class="info">
+                    <!-- <p class="date">撰寫日期:2017.05.09</p> -->
+                    <h2>兄弟之島</h2>
+                    <p>
+                        ㄟ~要不要出國玩? 喔~走!!<br>
+                        就這樣兄弟兩來到了長灘島 XD<br>
+                        這次旅程太多傻眼與笑點...<br>
+                        <p class="tag"># 入關時海關人員滿臉困惑</p>
+                        <p class="tag"># 被飯店員工要FB</p>
+                        <p class="tag"># 被航警攔下要電話</p>
+                        <p class="tag"># 東南亞小王子再度發威</p>
+                        <p class="tag"># 房間鑰匙丟在沙灘找到快往生</p>
+                        <p class="tag"># 最後颱風來襲倉皇而逃</p>
+                    </p>
+                </div>
+            </li>
+            <li><img src="v1/img/pic/p06/pic_06_02.jpg" alt="">
+                <div class="info">
+                    <p class="tag"># 豔遇不斷</p>
+                </div>
+            </li>
+            <li><img src="v1/img/pic/p06/pic_06_03.jpg" alt="">
+                <div class="info">
+                    <p class="tag"># shot、shot...嚇嚇嚇</p>
+                </div>
+            </li>
+            <li><img src="v1/img/pic/p06/pic_06_05.jpg" alt="">
+                <div class="info">
+                    <p class="tag"># 堆完後鑰匙也埋了</p>
+                </div>
+            </li>
+            <li><img src="v1/img/pic/p06/pic_06_07.jpg" alt="">
+                <div class="info">
+                    <p class="tag"># 沒什麼事~單純想放</p>
+                </div>
+            </li>
+            <li> <img src="v1/img/pic/p06/pic_06_08.jpg" alt="">
+                <div class="info">
+                    <p>度假模式 ON，在大廳放空滑一下。</p>
+                    <p class="tag"># 菲律賓 長灘島 飯店大廳</p>
+                </div>
+            </li>
+            <li> <img src="v1/img/pic/p06/pic_06_09.jpg" alt="">
+                <div class="info">
+                    <p>白沙灘初見面，天空海一色。</p>
+                    <p class="tag"># 菲律賓 長灘島 White Beach</p>
+                </div>
+            </li>
+            <li> <img src="v1/img/pic/p06/pic_06_10.jpg" alt="">
+                <div class="info">
+                    <p>落日把海面染成粉紫色，太美。</p>
+                    <p class="tag"># 菲律賓 長灘島 White Beach 日落</p>
+                </div>
+            </li>
+            <li> <img src="v1/img/pic/p06/pic_06_11.jpg" alt="">
+                <div class="info">
+                    <p>風帆剪影陪著晚霞，看見最浪漫的長灘黃昏。</p>
+                    <p class="tag"># 菲律賓 長灘島 White Beach 帆船夕陽</p>
+                </div>
+            </li>
+            <li><img src="v1/img/pic/p06/pic_06_04.jpg" alt="">
+                <div class="info">
+                    <p class="tag"># 暴風雨前的寧靜</p>
+                </div>
+            </li>
+            <li><img src="v1/img/pic/p06/pic_06_06.jpg" alt="">
+                <div class="info">
+                    <p class="tag"># 兄弟情之風雲變色</p>
+                </div>
+            </li>
+            <li class="video-card">
+                <figure class="video-figure">
+                    <video controls playsinline preload="metadata" poster="v1/img/pic/p06/pic_mp4_01.jpg" width="100%">
+                        <source src="https://cdn.jsdelivr.net/gh/akkwok/travel@main/v1/img/pic/p06/pic_mp4_01.mp4" type="video/mp4">
+                        抱歉，您的瀏覽器不支援影片播放，
+                        <a href="https://cdn.jsdelivr.net/gh/akkwok/travel@main/v1/img/pic/p06/pic_mp4_01.mp4" target="_blank" rel="noopener">請改用外部開啟</a>。
+                    </video>
+                    <figcaption class="sr-only">
+                        長灘島旅遊影片－颱風來了!
+                    </figcaption>
+                </figure>
+                <div class="info">
+                    <p class="tag"># 颱風來了~金恐怖!!!</p>
+                </div>
+            </li>
+        </ul>
+    </div>
 </div>
 <link rel="stylesheet" href="v1/css/lb-pager.css">
 <script src="v1/js/lb-pager.js" defer></script>

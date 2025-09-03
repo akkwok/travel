@@ -17,6 +17,18 @@
             <li>威尼斯</li>
         </ul>
     </article>
+<div class="pg">
+  <!-- 三顆隱藏的 radio，預設勾 3 欄 -->
+  <input class="pg-radio" type="radio" id="pg-2" name="pg-cols" checked>
+  <input class="pg-radio" type="radio" id="pg-3" name="pg-cols">
+  <input class="pg-radio" type="radio" id="pg-4" name="pg-cols">
+
+  <!-- 工具列（label 的 for 會對應到上面的 radio） -->
+  <div class="pg-toolbar" role="group" aria-label="欄數切換">
+    <label class="pg-btn" for="pg-2">2</label>
+    <label class="pg-btn" for="pg-3">3</label>
+    <label class="pg-btn" for="pg-4">4</label>
+  </div>
     <ul class="pic_group">
         <li><img src="v1/img/pic/p09/pic_09_01.jpg" alt="">
             <div class="info">
@@ -421,6 +433,7 @@
             </div>
         </li>
     </ul>
+</div>
 </div>
 <link rel="stylesheet" href="v1/css/lb-pager.css">
 <script src="v1/js/lb-pager.js" defer></script>
