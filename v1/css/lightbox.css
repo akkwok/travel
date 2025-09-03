@@ -255,7 +255,7 @@ li.tl-hover .card .meta li{
 /* 變數化間距與欄數，方便日後調整 */
 .pic_group{
   --gap: 16px;        /* 卡片縱向間距 + 欄間距 */
-  --cols: 4;          /* 預設 4 欄 */
+  --cols: 2;          /* 預設 4 欄 */
 
   /* 清單歸零 */
   list-style: none;
@@ -311,7 +311,7 @@ li.tl-hover .card .meta li{
 
 /* RWD：視寬改欄數（可依設計值微調斷點） */
 @media (max-width: 1200px){
-  .pic_group{ --cols: 3; }
+  .pic_group{ --cols: 2; }
 }
 @media (max-width: 900px){
   .pic_group{ --cols: 2; }
